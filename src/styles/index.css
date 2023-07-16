@@ -1,0 +1,219 @@
+@import 'normalize.css';
+@import 'nullstyles.css';
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+body {
+  font-size: 14px;
+  font-family: 'Rubik', sans-serif;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.side-bar,
+.side-bar-search {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 720px;
+}
+
+/* begin side-bar-search */
+.side-bar-search {
+  position: absolute;
+  top: 0px;
+  transition: left 0.5s;
+  background: #FFF;
+}
+
+.shown {
+  left: 0px;
+}
+
+.hidden {
+  left: -720px;
+}
+
+#search-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 40px 45px 0 45px;
+}
+
+#search-field {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid #ACACAC;
+  background: #FFF;
+  margin-right: 22px;
+  padding: 0 15px;
+}
+
+#search-field img {
+  margin-right: 10px;
+  width: 17px;
+  height: 17px;
+}
+
+#search-field input {
+  width: 100%;
+  font-weight: 700;
+  font-size: 18px;
+  color: #48484A;
+}
+
+#search-field input::placeholder {
+  font-weight: 400;
+  color: #ACACAC;
+}
+
+#button-hide-search {
+  margin-top: 45px;
+  margin-right: 45px;
+  align-self: end;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  background: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#button-hide-search::before,
+#button-hide-search::after {
+  content: '';
+  display: block;
+  width: 34px;
+  height: 3px;
+  background-color: #ACACAC;
+  position: absolute;
+  transition: all 0.5s;
+}
+
+#button-hide-search::before {
+  transform: rotate(45deg);
+}
+
+#button-hide-search::after {
+  transform: rotate(-45deg);
+}
+
+#button-hide-search:hover::before,
+#button-hide-search:hover::after {
+  background: #48484A;
+}
+
+/* end side-bar-search */
+
+/* begin side-bar */
+.side-bar {
+  background: no-repeat url('../image/cloudsBack.svg'), #FFF;
+  background-size: 102% auto;
+  background-blend-mode: difference;
+  background-position: center 20%;
+}
+
+.row-button {
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+.imageWeather {
+  flex-grow: 1;
+  width: 200px;
+  align-self: center;
+}
+
+.temperature {
+  margin-bottom: 15px;
+  align-self: center;
+
+  color: #48484A;
+  font-size: 96px;
+  font-weight: 900;
+}
+
+.temperature span {
+  font-size: 50px;
+}
+
+.description {
+  margin-bottom: 15px;
+  align-self: center;
+
+  color: #48484A;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.feeling {
+  margin-bottom: 80px;
+  align-self: center;
+
+  color: #ACACAC;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.today {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  color: #ACACAC;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.location {
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #ACACAC;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.location img {
+  margin-right: 10px;
+  height: 40px;
+}
+
+/* end side-bar */
+
+.main {
+  height: 100%;
+  width: 100%;
+  background-color: #F1F1F1;
+}
+
+.button {
+  height: 50px;
+  width: 180px;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  color: #48484A;
+  border-radius: 10px;
+  border: 2px solid #ACACAC;
+  background: #FFF;
+}
+
+.button-small {
+  width: 97px;
+  padding: 0 20px;
+}
