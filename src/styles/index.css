@@ -1,6 +1,13 @@
 @import 'normalize.css';
 @import 'nullstyles.css';
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap');
+
+:root {
+  --grey: #48484A;
+  --hint: #ACACAC;
+  --background-light: #F1F1F1;
+  --panel-light: #FFF;
+}
 
 body {
   font-size: 14px;
@@ -19,7 +26,8 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-width: 720px;
+  width: 460px;
+  padding: 45px 45px 35px 45px;
 }
 
 /* begin side-bar-search */
@@ -27,7 +35,7 @@ body {
   position: absolute;
   top: 0px;
   transition: left 0.5s;
-  background: #FFF;
+  background: var(--panel-light);
 }
 
 .shown {
@@ -35,49 +43,11 @@ body {
 }
 
 .hidden {
-  left: -720px;
-}
-
-#search-form {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 40px 45px 0 45px;
-}
-
-#search-field {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  border-radius: 10px;
-  border: 2px solid #ACACAC;
-  background: #FFF;
-  margin-right: 22px;
-  padding: 0 15px;
-}
-
-#search-field img {
-  margin-right: 10px;
-  width: 17px;
-  height: 17px;
-}
-
-#search-field input {
-  width: 100%;
-  font-weight: 700;
-  font-size: 18px;
-  color: #48484A;
-}
-
-#search-field input::placeholder {
-  font-weight: 400;
-  color: #ACACAC;
+  left: -460px;
 }
 
 #button-hide-search {
-  margin-top: 45px;
-  margin-right: 45px;
+  margin-bottom: 40px;
   align-self: end;
   width: 26px;
   height: 26px;
@@ -96,7 +66,7 @@ body {
   display: block;
   width: 34px;
   height: 3px;
-  background-color: #ACACAC;
+  background-color: var(--hint);
   position: absolute;
   transition: all 0.5s;
 }
@@ -111,22 +81,43 @@ body {
 
 #button-hide-search:hover::before,
 #button-hide-search:hover::after {
-  background: #48484A;
+  background: var(--grey);
+}
+
+#search-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+}
+
+#search-field {
+  padding: 0 15px 0 42px;
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid var(--hint);
+  background: no-repeat url('../image/search.svg');
+  background-position: 17px 50%;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--grey);
+}
+
+#search-field::placeholder {
+  font-weight: 400;
+  color: var(--hint);
 }
 
 /* end side-bar-search */
 
 /* begin side-bar */
 .side-bar {
-  background: no-repeat url('../image/cloudsBack.svg'), #FFF;
+  background: no-repeat url('../image/cloudsBack.svg'), var(--panel-light);
   background-size: 102% auto;
   background-blend-mode: difference;
   background-position: center 20%;
-}
-
-.row-button {
-  margin-top: 40px;
-  margin-left: 40px;
 }
 
 .imageWeather {
@@ -139,20 +130,21 @@ body {
   margin-bottom: 15px;
   align-self: center;
 
-  color: #48484A;
+  color: var(--grey);
   font-size: 96px;
   font-weight: 900;
 }
 
 .temperature span {
   font-size: 50px;
+  font-weight: 500;
 }
 
 .description {
   margin-bottom: 15px;
   align-self: center;
 
-  color: #48484A;
+  color: var(--grey);
   font-size: 36px;
   font-weight: 700;
 }
@@ -161,7 +153,7 @@ body {
   margin-bottom: 80px;
   align-self: center;
 
-  color: #ACACAC;
+  color: var(--hint);
   font-size: 18px;
   font-weight: 400;
 }
@@ -172,18 +164,17 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
 
-  color: #ACACAC;
+  color: var(--hint);
   font-size: 18px;
   font-weight: 400;
 }
 
 .location {
-  margin-bottom: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  color: #ACACAC;
+  color: var(--hint);
   font-size: 18px;
   font-weight: 400;
 }
@@ -197,23 +188,26 @@ body {
 
 .main {
   height: 100%;
-  width: 100%;
-  background-color: #F1F1F1;
+  flex-grow: 1;
+  background-color: var(--background-light);
 }
 
 .button {
+  padding: 0 27px;
   height: 50px;
-  width: 180px;
+  max-width: 100%;
   font-weight: 700;
   font-size: 18px;
   text-align: center;
-  color: #48484A;
+  color: var(--grey);
   border-radius: 10px;
-  border: 2px solid #ACACAC;
-  background: #FFF;
+  border: 2px solid var(--hint);
+  background: var(--panel-light);
 }
 
 .button-small {
-  width: 97px;
+  align-self: flex-end;
+  flex-shrink: 1;
+  min-width: none;
   padding: 0 20px;
 }
