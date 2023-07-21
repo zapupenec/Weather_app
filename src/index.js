@@ -7,6 +7,7 @@ const renderSearchPanel = (elements, state) => {
     shown: (elements) => {
       elements.searchPanelEl.classList.remove('hidden');
       elements.searchPanelEl.classList.add('shown');
+      elements.searchFieldEl.focus();
     },
   };
   return mapping[state.searchPanelState](elements);
@@ -38,6 +39,7 @@ const app = () => {
     btnHideSearch: document.getElementById('button-hide-search'),
     searchPanelEl: document.querySelector('.side-bar-search'),
     formSearchEl: document.getElementById('search-form'),
+    searchFieldEl: document.getElementById('search-field'),
     tabList: document.querySelectorAll('[role="tab"]'),
   }
 

@@ -1,6 +1,6 @@
 @import 'normalize.css';
 @import 'nullstyles.css';
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap');
 
 :root {
   --gray: #48484A;
@@ -12,8 +12,11 @@
 body {
   font-size: 14px;
   font-family: 'Rubik', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   color: var(--gray);
   background-color: var(--background-light);
+  transition: none !important;
 }
 
 .container {
@@ -56,7 +59,6 @@ body {
   align-self: end;
   width: 26px;
   height: 26px;
-  cursor: pointer;
   background: none;
 
   display: flex;
@@ -107,11 +109,15 @@ body {
   background-position: 17px 50%;
   font-weight: 700;
   font-size: 18px;
+  transition: 0.5s;
 }
 
 #search-field::placeholder {
-  font-weight: 400;
   color: var(--hint);
+}
+
+#search-field:focus {
+  border-color: var(--gray);
 }
 
 /* end side-bar-search */
@@ -157,7 +163,6 @@ body {
 
   color: var(--hint);
   font-size: 18px;
-  font-weight: 400;
 }
 
 .today {
@@ -168,7 +173,6 @@ body {
 
   color: var(--hint);
   font-size: 18px;
-  font-weight: 400;
 }
 
 .location {
@@ -178,7 +182,6 @@ body {
 
   color: var(--hint);
   font-size: 18px;
-  font-weight: 400;
 }
 
 .location img {
@@ -215,20 +218,14 @@ body {
   font-size: 20px;
 }
 
-.active-switcher,
-.inactive-switcher:hover {
+.active-switcher {
   font-size: 20px;
   position: relative;
   color: var(--gray);
+  cursor: text;
 }
 
-.inactive-switcher {
-  cursor: pointer;
-  color: var(--hint);
-}
-
-.active-switcher::after,
-.inactive-switcher:hover::after {
+.active-switcher::after {
   content: '';
   height: 3px;
   width: 100%;
@@ -238,10 +235,34 @@ body {
   bottom: -9px;
 }
 
+.inactive-switcher {
+  color: var(--hint);
+  transition: color 0.5s;
+  position: relative;
+}
+
+.inactive-switcher::after {
+  content: '';
+  height: 3px;
+  width: 100%;
+  background-color: var(--gray);
+  position: absolute;
+  left: 0;
+  bottom: -9px;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.inactive-switcher:hover,
+.inactive-switcher:hover::after {
+  font-size: 20px;
+  color: var(--gray);
+  opacity: 1;
+  transition: 0.5s;
+}
+
 .carusel-wrapper {
   margin-bottom: 38px;
-  font-style: normal;
-  font-weight: 400;
   position: relative;
 }
 
@@ -273,13 +294,13 @@ body {
 }
 
 .button-carusel::before {
-  border-radius: 3px 0px 0px 0px ;
+  border-radius: 3px 0px 0px 0px;
   transform: rotate(-30deg);
   transform-origin: center left;
 }
 
 .button-carusel::after {
-  border-radius: 0px 0px 0px 3px ;
+  border-radius: 0px 0px 0px 3px;
   transform: rotate(30deg);
   transform-origin: center left;
 }
@@ -291,7 +312,10 @@ body {
 
 .button-carusel-active {
   opacity: 1;
-  cursor: pointer;
+}
+
+.button-carusel-inactive {
+  cursor: auto;
 }
 
 .button-carusel-left {
@@ -350,7 +374,6 @@ body {
 .detail-today-title {
   margin-bottom: 19px;
   font-size: 24px;
-  font-style: normal;
   font-weight: 700;
 }
 
@@ -384,7 +407,7 @@ body {
   font-size: 18px;
   font-weight: 300;
   margin-top: 3px;
-  
+
   display: flex;
   align-items: center;
   gap: 12px;
@@ -408,7 +431,6 @@ body {
 .panel-extra-title {
   margin-bottom: 11px;
   font-size: 18px;
-  font-weight: 400;
 }
 
 .panel-extra-info {
@@ -438,6 +460,11 @@ body {
   border: 2px solid var(--hint);
   background: var(--panel-light);
   color: inherit;
+  transition: border-color 0.5s;
+}
+
+.button:hover {
+  border-color: var(--gray);
 }
 
 .button-small {
