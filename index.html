@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather App</title>
-  <link rel="stylesheet" href="src/styles/index.css">
+  <link rel="stylesheet" href="./src/styles/index.css">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
       <div>
         <button class="button" id="button-show-search">Поиск города</button>
       </div>
-      <img class="imageWeather" src="src/image/snowflake.svg" alt="snowflake.svg">
+      <img class="imageWeather" src="./src/image/snowflake.svg" alt="snowflake.svg">
       <p class="temperature">1 <span>°C</span></p>
       <p class="description">Снег</p>
       <p class="feeling">Ощущается как -3 °C</p>
@@ -31,15 +31,136 @@
         <p>Вс, 13 мар</p>
       </div>
       <div class="location">
-        <img src="src/image/location.svg" alt="location.svg">
+        <img src="./src/image/location.svg" alt="location.svg">
         <p>Москва</p>
       </div>
     </aside>
 
     <main class="main">
+      <div class="carusel-title">
+        <p>Прогноз</p>
+        <div class="carusel-switchers" role="switcher-list">
+          <button class="active-switcher" role="tab" id="switcher-carusel-days" aria-controls="carusel-days">на неделю</button>
+          <button class="inactive-switcher" role="tab" id="switcher-carusel-hours" aria-controls="carusel-hours">почасовой</button>
+        </div>
+      </div>
+      <div class="carusel-wrapper">
+        <div class="button-carusel button-carusel-left"></div>
+        <div class="carusel" role="tabpanel" id="carusel-days" aria-labelledby="switcher-carusel-days">
+          <div class="panel-day">
+            <p class="panel-day-date">Завтра</p>
+            <img src="./src/image/panelDay/fog.svg" alt="">
+            <div class="panel-day-temperature">
+              <p>10°C</p>
+              <p class="panel-day-feeling">4°C</p>
+            </div>
+          </div>
+          <div class="panel-day">
+            <p class="panel-day-date">Пн, 15 мар</p>
+            <img src="./src/image/panelDay/rain.svg" alt="">
+            <div class="panel-day-temperature">
+              <p>10°C</p>
+              <p class="panel-day-feeling">4°C</p>
+            </div>
+          </div>
+          <div class="panel-day">
+            <p class="panel-day-date">Вт, 16 мар</p>
+            <img src="./src/image/panelDay/rain.svg" alt="">
+            <div class="panel-day-temperature">
+              <p>10°C</p>
+              <p class="panel-day-feeling">4°C</p>
+            </div>
+          </div>
+          <div class="panel-day">
+            <p class="panel-day-date">Ср, 17 мар</p>
+            <img src="./src/image/panelDay/thunderstorm.svg" alt="">
+            <div class="panel-day-temperature">
+              <p>10°C</p>
+              <p class="panel-day-feeling">4°C</p>
+            </div>
+          </div>
+          <div class="panel-day">
+            <p class="panel-day-date">Чт, 18 мар</p>
+            <img src="./src/image/panelDay/thunderstorm.svg" alt="">
+            <div class="panel-day-temperature">
+              <p>10°C</p>
+              <p class="panel-day-feeling">4°C</p>
+            </div>
+          </div>
+          <div class="panel-day">
+            <p class="panel-day-date">Пт, 19 мар</p>
+            <img src="./src/image/panelDay/thunderstorm.svg" alt="">
+            <div class="panel-day-temperature">
+              <p>10°C</p>
+              <p class="panel-day-feeling">4°C</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="carusel carusel-inactive" role="tabpanel" id="carusel-days" aria-labelledby="switcher-carusel-hours">
+          <div class="panel-day">
+            <p class="panel-hour-time">15:00</p>
+            <img src="./src/image/panelDay/fog.svg" alt="">
+            <div class="hour-temperature">10°C</div>
+          </div>
+          <div class="panel-day">
+            <p class="panel-hour-time">16:00</p>
+            <img src="./src/image/panelDay/fog.svg" alt="">
+            <div class="hour-temperature">10°C</div>
+          </div>
+          <div class="panel-day">
+            <p class="panel-hour-time">17:00</p>
+            <img src="./src/image/panelDay/fog.svg" alt="">
+            <div class="hour-temperature">10°C</div>
+          </div>
+          <div class="panel-day">
+            <p class="panel-hour-time">18:00</p>
+            <img src="./src/image/panelDay/fog.svg" alt="">
+            <div class="hour-temperature">10°C</div>
+          </div>
+          <div class="panel-day">
+            <p class="panel-hour-time">19:00</p>
+            <img src="./src/image/panelDay/thunderstorm.svg" alt="">
+            <div class="hour-temperature">10°C</div>
+          </div>
+          <div class="panel-day">
+            <p class="panel-hour-time">20:00</p>
+            <img src="./src/image/panelDay/thunderstorm.svg" alt="">
+            <div class="hour-temperature">10°C</div>
+          </div>
+        </div>
+        <div class="button-carusel button-carusel-right button-carusel-active"></div>
+      </div>
+
+      <p class="detail-today-title">Подробно на сегодня</p>
+
+      <div class="today-panels">
+        <div class="today-panels-group">
+          <div class="panel-extra">
+            <p class="panel-extra-title">Скорость ветра</p>
+            <p class="panel-extra-info">7 <span>м/с</span></p>
+            <div class="direction-wind">СЗ</div>
+          </div>
+          <div class="panel-extra">
+            <p class="panel-extra-title">Влажность</p>
+            <p class="panel-extra-info">84 <span>%</span></p>
+          </div>
+        </div>
+        <div class="today-panels-group">
+          <div class="panel-extra small">
+            <p class="panel-extra-title">Видимость</p>
+            <p class="panel-extra-info">6.2 <span>км</span></p>
+          </div>
+          <div class="panel-extra small">
+            <p class="panel-extra-title">Давление</p>
+            <p class="panel-extra-info">742 <span class="pressure">мм рт.ст.</spanс>
+            </p>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
-  <script defer src="src/index.js"></script>
+  <script defer src="./src/index.js"></script>
 </body>
 
 </html>
