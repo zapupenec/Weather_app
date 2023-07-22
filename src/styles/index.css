@@ -28,7 +28,7 @@ body {
 }
 
 .side-bar,
-.side-bar-search {
+.search-panel {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -37,20 +37,17 @@ body {
   padding: 45px 45px 35px 45px;
 }
 
-/* begin side-bar-search */
-.side-bar-search {
+/* begin search-panel */
+.search-panel {
   position: absolute;
   top: 0px;
   transition: left 0.5s;
   background: var(--panel-light);
   z-index: 1;
-}
-
-.shown {
   left: 0px;
 }
 
-.hidden {
+.search-panel-hidden {
   left: -460px;
 }
 
@@ -120,7 +117,7 @@ body {
   border-color: var(--gray);
 }
 
-/* end side-bar-search */
+/* end search-panel */
 
 /* begin side-bar */
 .side-bar {
@@ -193,7 +190,6 @@ body {
 
 /* begin main */
 .main {
-  height: 100%;
   max-width: 980px;
   flex-grow: 1;
   background-color: var(--background-light);

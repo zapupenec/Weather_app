@@ -10,15 +10,15 @@
 
 <body>
   <div class="container">
-    <aside class="side-bar-search hidden">
+    <section class="search-panel search-panel-hidden">
       <button type="button" id="button-hide-search"></button>
       <form id="search-form">
         <input type="search" name="search" placeholder="Поиск города" id="search-field">
         <button type="submit" class="button button-small">Найти</button>
       </form>
-    </aside>
+    </section>
 
-    <aside class="side-bar">
+    <section class="side-bar">
       <div>
         <button class="button" id="button-show-search">Поиск города</button>
       </div>
@@ -34,15 +34,15 @@
         <img src="./src/image/location.svg" alt="location.svg">
         <p>Москва</p>
       </div>
-    </aside>
+    </section>
 
     <main class="main">
       <div class="carusel-title">
         <p>Прогноз</p>
-        <div class="carusel-switchers" role="switcher-list">
+        <nav class="carusel-switchers" role="switcher-list">
           <button class="active-switcher" role="tab" id="switcher-carusel-days" aria-controls="carusel-days">на неделю</button>
           <button class="inactive-switcher" role="tab" id="switcher-carusel-hours" aria-controls="carusel-hours">почасовой</button>
-        </div>
+        </nav>
       </div>
       <div class="carusel-wrapper">
         <button class="button-carusel button-carusel-left button-carusel-inactive"></button>
