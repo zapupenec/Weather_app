@@ -9,156 +9,73 @@
 </head>
 
 <body>
-  <div class="container">
-    <section class="search-panel search-panel-hidden">
-      <button type="button" id="button-hide-search"></button>
-      <form id="search-form">
-        <input type="search" name="search" placeholder="Поиск города" id="search-field">
-        <button type="submit" class="button button-small">Найти</button>
-      </form>
-    </section>
+  <div class="app">
+    <div class="container">
+      <section class="search-panel">
+        <button class="search-panel__button-close button-close" type="button" id="button-close-search-panel"></button>
+        <form class="search-panel__search-form search-form" id="search-form">
+          <input class="search-form__search-field" type="search" name="search" placeholder="Поиск города" id="search-field">
+          <button class="search-form__button button button_size_small" type="submit">Найти</button>
+        </form>
+      </section>
 
-    <section class="side-bar">
-      <div>
-        <button class="button" id="button-show-search">Поиск города</button>
-      </div>
-      <img class="imageWeather" src="./src/image/snowflake.svg" alt="snowflake.svg">
-      <p class="temperature">1 <span>°C</span></p>
-      <p class="description">Снег</p>
-      <p class="feeling">Ощущается как -3 °C</p>
-      <div class="today">
-        <p>Сегодня</p>
-        <p>Вс, 13 мар</p>
-      </div>
-      <div class="location">
-        <img src="./src/image/location.svg" alt="location.svg">
-        <p>Москва</p>
-      </div>
-    </section>
+      <section class="side-bar">
+        <button class="side-bar__button button" id="button-show-search-panel">Поиск города</button>
+        <img class="side-bar__imageWeather" src="./src/image/snowflake.svg" alt="snowflake.svg">
+        <p class="side-bar__temperature">1 <span class="side-bar__celsius">°C</span></p>
+        <p class="side-bar__description">Снег</p>
+        <p class="side-bar__feeling">Ощущается как -3 °C</p>
+        <div class="side-bar__today">
+          <p>Сегодня</p>
+          <time datetime="2021-03-13">Вс, 13 мар</time>
+        </div>
+        <p class="side-bar__location">Москва</p>
+      </section>
 
-    <main class="main">
-      <div class="carusel-title">
-        <p>Прогноз</p>
-        <nav class="carusel-switchers" role="switcher-list">
-          <button class="active-switcher" role="tab" id="switcher-carusel-days" aria-controls="carusel-days">на неделю</button>
-          <button class="inactive-switcher" role="tab" id="switcher-carusel-hours" aria-controls="carusel-hours">почасовой</button>
-        </nav>
-      </div>
-      <div class="carusel-wrapper">
-        <button class="button-carusel button-carusel-left button-carusel-inactive"></button>
-        <div class="carusel" role="tabpanel" id="carusel-days" aria-labelledby="switcher-carusel-days">
-          <div class="panel-day">
-            <p class="panel-day-date">Завтра</p>
-            <img src="./src/image/panelDay/fog.svg" alt="">
-            <div class="panel-day-temperature">
-              <p>10°C</p>
-              <p class="panel-day-feeling">4°C</p>
+      <main class="main">
+        <div class="main__switchers switchers">
+          <p class="switchers__title">Прогноз</p>
+          <nav class="switchers__nav">
+            <button class="switchers__button switchers__button_active" role="tab" id="swiper-days" aria-controls="swiper-days">на неделю</button>
+            <button class="switchers__button" role="tab" id="swiper-hours" aria-controls="swiper-hours">почасовой</button>
+          </nav>
+        </div>
+
+        <div class="main__swiper swiper">
+          <button class="swiper__button swiper__button_left arrow-button"></button>
+          <ul class="swiper__items swiper__items_shown" role="tabpanel" aria-labelledby="swiper-days"></ul>
+          <ul class="swiper__items" role="tabpanel" aria-labelledby="swiper-hours"></ul>
+          <button class="swiper__button swiper__button_right arrow-button arrow-button_active"></button>
+        </div>
+
+        <div class="today-panels">
+          <p class="today-panels__title">Подробно на сегодня</p>
+          <div class="today-panels__group">
+            <div class="panel-extra">
+              <p class="panel-extra__title">Скорость ветра</p>
+              <p class="panel-extra__info">7 <span class="panel-extra__measure">м/с</span></p>
+              <div class="panel-extra__direction-wind">СЗ</div>
+            </div>
+            <div class="panel-extra">
+              <p class="panel-extra__title">Влажность</p>
+              <p class="panel-extra__info">84 <span class="panel-extra__measure">%</span></p>
             </div>
           </div>
-          <div class="panel-day">
-            <p class="panel-day-date">Пн, 15 мар</p>
-            <img src="./src/image/panelDay/rain.svg" alt="">
-            <div class="panel-day-temperature">
-              <p>10°C</p>
-              <p class="panel-day-feeling">4°C</p>
+          <div class="today-panels__group">
+            <div class="panel-extra panel-extra_size_small">
+              <p class="panel-extra__title">Видимость</p>
+              <p class="panel-extra__info">6.2 <span class="panel-extra__measure">км</span></p>
             </div>
-          </div>
-          <div class="panel-day">
-            <p class="panel-day-date">Вт, 16 мар</p>
-            <img src="./src/image/panelDay/rain.svg" alt="">
-            <div class="panel-day-temperature">
-              <p>10°C</p>
-              <p class="panel-day-feeling">4°C</p>
-            </div>
-          </div>
-          <div class="panel-day">
-            <p class="panel-day-date">Ср, 17 мар</p>
-            <img src="./src/image/panelDay/thunderstorm.svg" alt="">
-            <div class="panel-day-temperature">
-              <p>10°C</p>
-              <p class="panel-day-feeling">4°C</p>
-            </div>
-          </div>
-          <div class="panel-day">
-            <p class="panel-day-date">Чт, 18 мар</p>
-            <img src="./src/image/panelDay/thunderstorm.svg" alt="">
-            <div class="panel-day-temperature">
-              <p>10°C</p>
-              <p class="panel-day-feeling">4°C</p>
-            </div>
-          </div>
-          <div class="panel-day">
-            <p class="panel-day-date">Пт, 19 мар</p>
-            <img src="./src/image/panelDay/thunderstorm.svg" alt="">
-            <div class="panel-day-temperature">
-              <p>10°C</p>
-              <p class="panel-day-feeling">4°C</p>
+            <div class="panel-extra panel-extra_size_small">
+              <p class="panel-extra__title">Давление</p>
+              <p class="panel-extra__info">742 <span class="panel-extra__measure panel-extra__measure_size_small">мм рт.ст.</span>
+              </p>
             </div>
           </div>
         </div>
 
-        <div class="carusel carusel-inactive" role="tabpanel" id="carusel-days" aria-labelledby="switcher-carusel-hours">
-          <div class="panel-day">
-            <p class="panel-hour-time">15:00</p>
-            <img src="./src/image/panelDay/fog.svg" alt="">
-            <div class="hour-temperature">10°C</div>
-          </div>
-          <div class="panel-day">
-            <p class="panel-hour-time">16:00</p>
-            <img src="./src/image/panelDay/fog.svg" alt="">
-            <div class="hour-temperature">10°C</div>
-          </div>
-          <div class="panel-day">
-            <p class="panel-hour-time">17:00</p>
-            <img src="./src/image/panelDay/fog.svg" alt="">
-            <div class="hour-temperature">10°C</div>
-          </div>
-          <div class="panel-day">
-            <p class="panel-hour-time">18:00</p>
-            <img src="./src/image/panelDay/fog.svg" alt="">
-            <div class="hour-temperature">10°C</div>
-          </div>
-          <div class="panel-day">
-            <p class="panel-hour-time">19:00</p>
-            <img src="./src/image/panelDay/thunderstorm.svg" alt="">
-            <div class="hour-temperature">10°C</div>
-          </div>
-          <div class="panel-day">
-            <p class="panel-hour-time">20:00</p>
-            <img src="./src/image/panelDay/thunderstorm.svg" alt="">
-            <div class="hour-temperature">10°C</div>
-          </div>
-        </div>
-        <button class="button-carusel button-carusel-right button-carusel-active"></button>
-      </div>
-
-      <p class="detail-today-title">Подробно на сегодня</p>
-
-      <div class="today-panels">
-        <div class="today-panels-group">
-          <div class="panel-extra">
-            <p class="panel-extra-title">Скорость ветра</p>
-            <p class="panel-extra-info">7 <span>м/с</span></p>
-            <div class="direction-wind">СЗ</div>
-          </div>
-          <div class="panel-extra">
-            <p class="panel-extra-title">Влажность</p>
-            <p class="panel-extra-info">84 <span>%</span></p>
-          </div>
-        </div>
-        <div class="today-panels-group">
-          <div class="panel-extra small">
-            <p class="panel-extra-title">Видимость</p>
-            <p class="panel-extra-info">6.2 <span>км</span></p>
-          </div>
-          <div class="panel-extra small">
-            <p class="panel-extra-title">Давление</p>
-            <p class="panel-extra-info">742 <span class="pressure">мм рт.ст.</spanс>
-            </p>
-          </div>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
   <script defer src="./src/index.js"></script>
 </body>
