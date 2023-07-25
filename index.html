@@ -11,17 +11,19 @@
 <body>
   <div class="app">
     <div class="container">
-      <section class="search-panel">
-        <button class="search-panel__button-close button-close" type="button" id="button-close-search-panel"></button>
-        <form class="search-panel__search-form search-form" id="search-form">
-          <input class="search-form__search-field" type="search" name="search" placeholder="Поиск города" id="search-field">
-          <button class="search-form__button button button_size_small" type="submit">Найти</button>
-        </form>
-      </section>
-
       <section class="side-bar">
+        <div class="side-bar__search-panel search-panel">
+          <button class="search-panel__button-close button-close" type="button" id="button-close-search-panel"></button>
+          <form class="search-panel__search-form search-form" id="search-form">
+            <input class="search-form__search-field" type="search" name="search" placeholder="Поиск города" id="search-field">
+            <button class="search-form__button button button_size_small" type="submit">Найти</button>
+          </form>
+        </div>
+
         <button class="side-bar__button button" id="button-show-search-panel">Поиск города</button>
-        <img class="side-bar__imageWeather" src="./src/image/snowflake.svg" alt="snowflake.svg">
+        <div class="side-bar__bgWeather">
+          <img class="side-bar__imageWeather" src="./src/image/snowflake.svg" alt="snowflake.svg">
+        </div>
         <p class="side-bar__temperature">1 <span class="side-bar__celsius">°C</span></p>
         <p class="side-bar__description">Снег</p>
         <p class="side-bar__feeling">Ощущается как -3 °C</p>

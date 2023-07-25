@@ -1,197 +1,199 @@
 // mock
 const today = new Date('March 13, 2021 14:00:00');
 
-const dataPanelDays = [
-  {
-    description: 'default',
-    temperatureDay: 10,
-    temperatureNight: 4,
-  },
-  {
-    description: 'rain',
-    temperatureDay: 10,
-    temperatureNight: 4,
-  },
-  {
-    description: 'rain',
-    temperatureDay: 10,
-    temperatureNight: 4,
-  },
-  {
-    description: 'thunderstorm',
-    temperatureDay: 10,
-    temperatureNight: 4,
-  },
-  {
-    description: 'thunderstorm',
-    temperatureDay: 10,
-    temperatureNight: 4,
-  },
-  {
-    description: 'thunderstorm',
-    temperatureDay: 10,
-    temperatureNight: 4,
-  },
-].map((dataDay, i) => {
+const forecast = {
+  days: [
+    {
+      description: 'default',
+      temperatureDay: 10,
+      temperatureNight: 4,
+    },
+    {
+      description: 'rain',
+      temperatureDay: 10,
+      temperatureNight: 4,
+    },
+    {
+      description: 'rain',
+      temperatureDay: 10,
+      temperatureNight: 4,
+    },
+    {
+      description: 'thunderstorm',
+      temperatureDay: 10,
+      temperatureNight: 4,
+    },
+    {
+      description: 'thunderstorm',
+      temperatureDay: 10,
+      temperatureNight: 4,
+    },
+    {
+      description: 'thunderstorm',
+      temperatureDay: 10,
+      temperatureNight: 4,
+    },
+    {
+      description: 'thunderstorm',
+      temperatureDay: 10,
+      temperatureNight: 4,
+    },
+  ],
+
+  hours: [
+    {
+      description: 'default',
+      temperature: 10,
+    },
+    {
+      description: 'default',
+      temperature: 10,
+    },
+    {
+      description: 'default',
+      temperature: 10,
+    },
+    {
+      description: 'default',
+      temperature: 10,
+    },
+    {
+      description: 'thunderstorm',
+      temperature: 10,
+    },
+    {
+      description: 'thunderstorm',
+      temperature: 10,
+    },
+    {
+      description: 'default',
+      temperature: 10,
+    },
+    {
+      description: 'default',
+      temperature: 10,
+    },
+    {
+      description: 'default',
+      temperature: 10,
+    },
+    {
+      description: 'default',
+      temperature: 10,
+    },
+    {
+      description: 'thunderstorm',
+      temperature: 10,
+    },
+    {
+      description: 'thunderstorm',
+      temperature: 10,
+    },
+  ],
+};
+
+forecast.days = forecast.days.map((dataDay, i) => {
   dataDay.date = new Date(today);
   dataDay.date.setDate(dataDay.date.getDate() + 1 + i);
   return dataDay;
 });
 
-const dataPanelHours = [
-  {
-    description: 'default',
-    temperature: 10,
-  },
-  {
-    description: 'default',
-    temperature: 10,
-  },
-  {
-    description: 'default',
-    temperature: 10,
-  },
-  {
-    description: 'default',
-    temperature: 10,
-  },
-  {
-    description: 'thunderstorm',
-    temperature: 10,
-  },
-  {
-    description: 'thunderstorm',
-    temperature: 10,
-  },
-]
+forecast.hours = forecast.hours.map((dataDay, i) => {
+  const date = new Date(today);
+  date.setHours(date.getHours() + 1 + i);
+  dataDay.time = date.getHours();
+  return dataDay;
+});
 // mock
 
-const renderPanelsDaysV1 = (elements, dataPanelDays) => {
-  const itemElements = dataPanelDays.map((data) => {
-    const timeEl = document.createElement('time');
-    timeEl.className = 'panel-day__date';
+const renderPanelDay = (forecastDay) => {
+  const itemEl = document.createElement('li')
+  itemEl.className = 'panel-day';
 
-    const year = data.date.getFullYear();
-    const month = `${data.date.getMonth() + 1}`.padStart(2, '0');
-    const day = `${data.date.getDate()}`.padStart(2, '0');
-    const datatime = `${year}-${month}-${day}`
-    timeEl.setAttribute('datatime', datatime);
+  const year = forecastDay.date.getFullYear();
+  const month = `${forecastDay.date.getMonth() + 1}`.padStart(2, '0');
+  const day = `${forecastDay.date.getDate()}`.padStart(2, '0');
+  const datatime = `${year}-${month}-${day}`
 
-    if (data.date.getDate() - today.getDate() === 1) {
-      timeEl.textContent = 'Завтра';
-    } else {
-      const dateString = data.date.toLocaleDateString('ru-RU', {
-        month: 'short',
-        weekday: 'short',
-        day: 'numeric',
-      });
-      timeEl.textContent = `${dateString[0].toUpperCase()}${dateString.slice(1, -1)}`;
+  let date;
+  if (forecastDay.date.getDate() - today.getDate() === 1) {
+    date = 'Завтра';
+  } else {
+    const dateString = forecastDay.date.toLocaleDateString('ru-RU', {
+      month: 'short',
+      weekday: 'short',
+      day: 'numeric',
+    });
+    date = `${dateString[0].toUpperCase()}${dateString.slice(1, -1)}`;
+  }
+
+  itemEl.innerHTML = `
+    <time class="panel-day__date" datatime="${datatime}">${date}</time>
+    <img class="panel-day__image" src="./src/image/panel/${forecastDay.description}.svg" alt="${forecastDay.description}">
+    <div class="panel-day__temperature">
+      <span class="panel-day__temperature-day">${forecastDay.temperatureDay}°C</span>
+      <span class="panel-day__temperature-night">${forecastDay.temperatureNight}°C</span>
+    </div>
+  `;
+  return itemEl;
+}
+
+const renderPanelHour = (forecastHour) => {
+  const itemEl = document.createElement('li')
+  itemEl.className = 'panel-hour';
+
+  const hours = forecastHour.time === 0 ? forecastHour.time : `${forecastHour.time}`.padStart(2, '0');
+  itemEl.innerHTML = `
+    <time class="panel-hour__date" datatime="${hours}:00">${hours}:00</time>
+    <img class="panel-hour__image" src="./src/image/panel/${forecastHour.description}.svg" alt="${forecastHour.description}">
+    <span class="panel-hour__temperature">${forecastHour.temperature}°C</span>
+  `;
+
+  return itemEl;
+}
+
+const renderPanels = (elements, forecast) => {
+  const redrerPanel = {
+    days: renderPanelDay,
+    hours: renderPanelHour,
+  };
+
+  Object.keys(forecast).forEach((forecastName) => {
+    const itemElements = forecast[forecastName]
+      .map((currentForecast) => redrerPanel[forecastName](currentForecast))
+
+    const swiperItemsEl = [...elements.swiperItemsElelements]
+      .find((swiperItemsEl) => swiperItemsEl
+        .getAttribute('aria-labelledby') === `swiper-${forecastName}`);
+
+    swiperItemsEl.append(...itemElements);
+  })
+};
+
+const renderSwiper = (state) => {
+  const activeSwiperEl = document.querySelector(`[aria-labelledby="${state.activeTabId}"]`);
+  const itemsElelements = activeSwiperEl.childNodes;
+  const widthSwiperEl = activeSwiperEl.clientWidth;
+  const styleSwiperEl = window.getComputedStyle(activeSwiperEl);
+  const gap = Number(`${styleSwiperEl.gap}`.replace(/[^0-9]/g,""));
+  const sidePadding = Number(`${styleSwiperEl.paddingLeft}`.replace(/[^0-9]/g,""));
+  const widthItemEl = itemsElelements[0].clientWidth;
+
+  const visibleItemsCount = Math.floor((widthSwiperEl - sidePadding * 2) / (widthItemEl + gap));
+  itemsElelements.forEach((itemEl, i) => {
+    if (document.querySelector('.app').clientWidth < 721) {
+      // itemEl.classList.remove('swiper__item_hidden');
+      itemEl.style.display = 'flex';
+      return;
     }
-
-    const imgEl = document.createElement('img');
-    imgEl.className = 'panel-day__image';
-    imgEl.src = `./src/image/panel/${data.description}.svg`;
-    imgEl.alt = data.description;
-
-    const temperatureDayEl = document.createElement('span');
-    temperatureDayEl.className = 'panel-day__temperature-day';
-    temperatureDayEl.textContent = `${data.temperatureDay}°C`;
-
-    const temperatureNightEl = document.createElement('span');
-    temperatureNightEl.className = 'panel-day__temperature-night';
-    temperatureNightEl.textContent = `${data.temperatureNight}°C`;
-
-    const temperatureEl = document.createElement('div');
-    temperatureEl.className = 'panel-day__temperature';
-    temperatureEl.append(temperatureDayEl, temperatureNightEl);
-
-    const itemEl = document.createElement('li')
-    itemEl.className = 'panel-day';
-    itemEl.append(timeEl, imgEl, temperatureEl);
-
-    return itemEl;
-  });
-
-  elements.swiperDaysEl.append(...itemElements);
-};
-const renderPanelsDaysV2 = (elements, dataPanelDays) => {
-  const innerHTML = dataPanelDays.map((data) => {
-    const year = data.date.getFullYear();
-    const month = `${data.date.getMonth() + 1}`.padStart(2, '0');
-    const day = `${data.date.getDate()}`.padStart(2, '0');
-    const datatime = `${year}-${month}-${day}`
-
-    let date;
-    if (data.date.getDate() - today.getDate() === 1) {
-      date = 'Завтра';
-    } else {
-      const dateString = data.date.toLocaleDateString('ru-RU', {
-        month: 'short',
-        weekday: 'short',
-        day: 'numeric',
-      });
-      date = `${dateString[0].toUpperCase()}${dateString.slice(1, -1)}`;
+    if (i < visibleItemsCount) {
+      // itemEl.classList.remove('swiper__item_hidden');
+      itemEl.style.display = 'flex';
+      return;
     }
-
-    const itemInnerHTML = `
-      <li class="panel-day">
-        <time class="panel-day__date" datatime="${datatime}">${date}</time>
-        <img class="panel-day__image" src="./src/image/panel/${data.description}.svg" alt="${data.description}">
-        <div class="panel-day__temperature">
-          <span class="panel-day__temperature-day">${data.temperatureDay}°C</span>
-          <span class="panel-day__temperature-night">${data.temperatureNight}°C</span>
-        </div>
-      </li>
-    `;
-    return itemInnerHTML;
+    // itemEl.classList.toggle('swiper__item_hidden');
+    itemEl.style.display = 'none';
   });
-
-  elements.swiperDaysEl.insertAdjacentHTML('afterbegin', innerHTML.join(''))
-};
-
-const renderPanelsHoursV1 = (elements, dataPanelHours) => {
-  const itemElements = dataPanelHours.map((data, i) => {
-    const timeEl = document.createElement('time');
-    timeEl.className = 'panel-hour-time';
-
-    const hours = today.getHours() + 1 + i;
-    const time = `${hours}:00`
-    timeEl.setAttribute('datatime', time);
-    timeEl.textContent = time;
-
-    const imgEl = document.createElement('img');
-    imgEl.src = `./src/image/panel/${data.description}.svg`;
-    imgEl.alt = data.description;
-
-    const temperatureEl = document.createElement('span');
-    temperatureEl.className = 'hour-temperature';
-    temperatureEl.textContent = `${data.temperature}°C`;
-
-    const itemEl = document.createElement('li')
-    itemEl.className = 'panel-hour';
-    itemEl.append(timeEl, imgEl, temperatureEl);
-
-    return itemEl;
-  });
-
-  elements.swiperHoursEl.append(...itemElements);
-};
-const renderPanelsHoursV2 = (elements, dataPanelHours) => {
-  const innerHTML = dataPanelHours.map((data, i) => {
-    const hours = today.getHours() + 1 + i;
-
-    const itemInnerHTML = `
-      <li class="panel-hour">
-        <time class="panel-hour__date" datatime="${hours}:00">${hours}:00</time>
-        <img class="panel-hour__image" src="./src/image/panel/${data.description}.svg" alt="${data.description}">
-        <span class="panel-hour__temperature">${data.temperature}°C</span>
-      </li>
-    `;
-
-    return itemInnerHTML;
-  });
-
-  elements.swiperHoursEl.insertAdjacentHTML('afterbegin', innerHTML.join(''))
 };
 
 const renderSearchPanel = (elements, state) => {
@@ -207,11 +209,16 @@ const renderSearchPanel = (elements, state) => {
   return mapping[state.searchPanelState](elements);
 };
 
-const renderTabs = (elements) => {
+const renderTabs = (elements, state) => {
   elements.tabList.forEach((tab) => {
     const tabpanel = document.querySelector(`[aria-labelledby="${tab.id}"]`);
-    tab.classList.toggle('switchers__button_active');
-    tabpanel.classList.toggle('swiper__items_shown');
+    if (state.activeTabId === tab.id) {
+      tab.classList.add('switchers__button_active');
+      tabpanel.classList.add('swiper__items_shown');
+      return;
+    }
+    tab.classList.remove('switchers__button_active');
+    tabpanel.classList.remove('swiper__items_shown');
   });
 };
 
@@ -228,17 +235,19 @@ const app = () => {
     formSearchEl: document.getElementById('search-form'),
     searchFieldEl: document.getElementById('search-field'),
     tabList: document.querySelectorAll('[role="tab"]'),
-    swiperDaysEl: document.querySelector('[aria-labelledby="swiper-days"]'),
-    swiperHoursEl: document.querySelector('[aria-labelledby="swiper-hours"]'),
+    swiperItemsElelements: document.querySelectorAll('.swiper__items'),
   }
 
-  renderPanelsDaysV2(elements, dataPanelDays);
-  renderPanelsHoursV2(elements, dataPanelHours);
+  renderPanels(elements, forecast);
+  renderSwiper(state);
+
+  window.addEventListener('resize', () => renderSwiper(state));
 
   elements.tabList.forEach((tab) => {
     tab.addEventListener('click', (e) => {
       state.activeTabId = e.target.id;
       renderTabs(elements, state);
+      renderSwiper(state);
     })
   })
 
