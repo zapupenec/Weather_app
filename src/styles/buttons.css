@@ -8,13 +8,13 @@
   text-align: center;
   border-radius: 10px;
   border: 2px solid var(--hint);
-  background: var(--panel-light);
+  background: var(--panel);
   color: inherit;
   transition: border-color 0.5s;
 }
 
 .button:hover {
-  border-color: var(--gray);
+  border-color: var(--text);
 }
 
 .button_size_small {
@@ -25,7 +25,7 @@
   content: '';
   height: 38px;
   width: 38px;
-  background-color: var(--panel-light);
+  background-color: var(--panel);
   border-radius: 50%;
   opacity: 0.3;
   cursor: default;
@@ -42,7 +42,7 @@
   margin-top: -1.5px;
   left: 50%;
   margin-left: -7px;
-  transition: 0.5s;
+  transition: background-color 0.5s;
 }
 
 .arrow-button::before {
@@ -64,5 +64,5 @@
 
 .arrow-button_active:hover::before,
 .arrow-button_active:hover::after {
-  background: var(--gray);
+  background-color: var(--text);
 }

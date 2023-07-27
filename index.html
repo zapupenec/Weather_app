@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather App</title>
   <link rel="stylesheet" href="./src/styles/index.css">
+  <link rel="stylesheet" href="./src/styles/media.css">
+  <script defer src="./src/index.js"></script>
 </head>
 
 <body>
@@ -20,7 +22,12 @@
           </form>
         </div>
 
-        <button class="side-bar__button button" id="button-show-search-panel">Поиск города</button>
+        <div class="side-bar__buttons-row">
+          <button class="button" id="button-show-search-panel">Поиск города</button>
+          <button class="theme-switcher" id="theme-switcher">
+            <span class="theme-switcher__checkbox"></span>
+          </button>
+        </div>
         <div class="side-bar__bgWeather">
           <img class="side-bar__imageWeather" src="./src/image/snowflake.svg" alt="snowflake.svg">
         </div>
@@ -79,7 +86,6 @@
       </main>
     </div>
   </div>
-  <script defer src="./src/index.js"></script>
 </body>
 
 </html>

@@ -175,13 +175,13 @@ const renderSwiper = (state) => {
   const itemsElelements = activeSwiperEl.childNodes;
   const widthSwiperEl = activeSwiperEl.clientWidth;
   const styleSwiperEl = window.getComputedStyle(activeSwiperEl);
-  const gap = Number(`${styleSwiperEl.gap}`.replace(/[^0-9]/g,""));
-  const sidePadding = Number(`${styleSwiperEl.paddingLeft}`.replace(/[^0-9]/g,""));
+  const gap = Number(`${styleSwiperEl.gap}`.replace(/[^0-9]/g, ""));
+  const sidePadding = Number(`${styleSwiperEl.paddingLeft}`.replace(/[^0-9]/g, ""));
   const widthItemEl = itemsElelements[0].clientWidth;
 
   const visibleItemsCount = Math.floor((widthSwiperEl - sidePadding * 2) / (widthItemEl + gap));
   itemsElelements.forEach((itemEl, i) => {
-    if (document.querySelector('.app').clientWidth < 721) {
+    if (window.matchMedia('(max-width: 720px)').matches) {
       // itemEl.classList.remove('swiper__item_hidden');
       itemEl.style.display = 'flex';
       return;
@@ -222,10 +222,36 @@ const renderTabs = (elements, state) => {
   });
 };
 
+const toggleThemeMode = (elements, state) => {
+  if (state.darkMode) {
+    elements.switcherThemeCheckboxEl.classList.add('theme-switcher__checkbox_dark');
+    document.documentElement.classList.add('dark-mode', state.darkMode);
+  } else {
+    elements.switcherThemeCheckboxEl.classList.remove('theme-switcher__checkbox_dark');
+    document.documentElement.classList.remove('dark-mode', state.darkMode);
+  }
+
+  localStorage.setItem('darkMode', state.darkMode);
+}
+
+const setInitialThemeMode = (clientTheme) => {
+  if (localStorage.getItem('darkMode')) {
+    return localStorage.getItem('darkMode') === 'true';
+  }
+  return clientTheme.matches;
+};
+
 const app = () => {
+  const clientTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  clientTheme.addEventListener('change', (e) => {
+    state.darkMode = e.matches;
+    toggleThemeMode(elements, state)
+  });
+
   const state = {
     searchPanelState: 'hidden',
-    activeTabId: 'swiper-days',
+    activeTabId: localStorage.getItem('activeTabId') ?? 'swiper-days',
+    darkMode: setInitialThemeMode(clientTheme),
   }
 
   const elements = {
@@ -236,16 +262,20 @@ const app = () => {
     searchFieldEl: document.getElementById('search-field'),
     tabList: document.querySelectorAll('[role="tab"]'),
     swiperItemsElelements: document.querySelectorAll('.swiper__items'),
+    switcherThemeEl: document.getElementById('theme-switcher'),
+    switcherThemeCheckboxEl: document.querySelector('.theme-switcher__checkbox'),
   }
 
   renderPanels(elements, forecast);
+  toggleThemeMode(elements, state);
+  renderTabs(elements, state);
   renderSwiper(state);
-
   window.addEventListener('resize', () => renderSwiper(state));
 
   elements.tabList.forEach((tab) => {
     tab.addEventListener('click', (e) => {
       state.activeTabId = e.target.id;
+      localStorage.setItem('activeTabId', state.activeTabId)
       renderTabs(elements, state);
       renderSwiper(state);
     })
@@ -264,6 +294,11 @@ const app = () => {
   elements.formSearchEl.addEventListener('submit', (e) => {
     e.preventDefault();
   });
+
+  elements.switcherThemeEl.addEventListener('click', () => {
+    state.darkMode = !state.darkMode;
+    toggleThemeMode(elements, state);
+  })
 };
 
 app();
