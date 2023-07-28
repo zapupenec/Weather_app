@@ -11,7 +11,8 @@
   --very-hint: #D3D3D3;
   --background: #F1F1F1;
   --panel: #FFF;
-  --switcher-theme-color: #E6E6E6;
+  --switcher-theme-color: #48484A;
+  --switcher-theme-moon: #E6E6E6;
 }
 
 .dark-mode {
@@ -21,6 +22,7 @@
   --background: #100E1C;
   --panel: #212331;
   --switcher-theme-color: #EC6E4D;
+  --switcher-theme-moon: #212331;
 }
 
 body {
@@ -44,7 +46,7 @@ body {
 }
 
 .container {
-  width: 1440px;
+  width: 100vw;
   height: 720px;
   margin: 0 auto;
 
@@ -54,8 +56,8 @@ body {
 }
 
 .main {
-  flex-grow: 1;
-  max-width: 100%;
+  margin: 0 auto;
+  max-width: 980px;
   width: 100%;
   overflow: hidden;
   padding: 45px 130px 45px 130px;
@@ -96,29 +98,33 @@ body {
   position: relative;
 }
 
-.switchers__button::after {
+.switchers__button:hover {
+  color: var(--text);
+}
+
+.switchers__button_active {
+  color: var(--text);
+  cursor: text;
+  position: relative;
+}
+
+.switchers__button::after,
+.switchers__button_active::after {
   content: '';
   height: 3px;
-  width: 100%;
+  width: 0;
   background-color: var(--text);
   position: absolute;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: -9px;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s, width 0.5s;
   cursor: default;
 }
 
-.switchers__button:hover,
-.switchers__button:hover::after {
-  color: var(--text);
-  opacity: 1;
-}
-
-.switchers__button_active,
 .switchers__button_active::after {
-  color: var(--text);
-  cursor: text;
+  width: 100%;
   opacity: 1;
 }
 

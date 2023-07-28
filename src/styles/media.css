@@ -5,12 +5,8 @@
 }
 
 @media (max-width: 1440px) {
-  .container {
-    width: 100vw;
-  }
-
   .side-bar {
-    min-width: calc(320px + (420 - 320) * ((100vw - 834px) / (1440 - 834)));
+    min-width: calc(320px + (460 - 320) * ((100vw - 834px) / (1440 - 834)));
     padding-right: calc(25px + (45 - 25) * ((100vw - 834px) / (1440 - 834)));
     padding-left: calc(25px + (45 - 25) * ((100vw - 834px) / (1440 - 834)));
   }

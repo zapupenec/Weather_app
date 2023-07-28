@@ -173,13 +173,16 @@ const renderPanels = (elements, forecast) => {
 const renderSwiper = (state) => {
   const activeSwiperEl = document.querySelector(`[aria-labelledby="${state.activeTabId}"]`);
   const itemsElelements = activeSwiperEl.childNodes;
-  const widthSwiperEl = activeSwiperEl.clientWidth;
   const styleSwiperEl = window.getComputedStyle(activeSwiperEl);
-  const gap = Number(`${styleSwiperEl.gap}`.replace(/[^0-9]/g, ""));
+
   const sidePadding = Number(`${styleSwiperEl.paddingLeft}`.replace(/[^0-9]/g, ""));
+  const widthSwiperEl = activeSwiperEl.clientWidth - 2 * sidePadding;
+  const gap = Number(`${styleSwiperEl.gap}`.replace(/[^0-9]/g, ""));
   const widthItemEl = itemsElelements[0].clientWidth;
 
-  const visibleItemsCount = Math.floor((widthSwiperEl - sidePadding * 2) / (widthItemEl + gap));
+  const temp = Math.floor(widthSwiperEl / (widthItemEl + gap))
+  const visibleItemsCount = widthSwiperEl - (widthItemEl + gap) * temp < widthItemEl ? temp : temp + 1
+
   itemsElelements.forEach((itemEl, i) => {
     if (window.matchMedia('(max-width: 720px)').matches) {
       // itemEl.classList.remove('swiper__item_hidden');
