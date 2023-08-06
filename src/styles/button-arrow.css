@@ -1,27 +1,4 @@
-.button {
-  padding: 0 27px;
-  height: 50px;
-  min-height: 50px;
-  max-width: 100%;
-  font-weight: 700;
-  font-size: 18px;
-  text-align: center;
-  border-radius: 10px;
-  border: 2px solid var(--hint);
-  background: var(--panel);
-  color: inherit;
-  transition: border-color 0.5s;
-}
-
-.button:hover {
-  border-color: var(--text);
-}
-
-.button_size_small {
-  padding: 0 20px;
-}
-
-.arrow-button {
+.button-arrow {
   content: '';
   height: 38px;
   width: 38px;
@@ -31,8 +8,8 @@
   cursor: default;
 }
 
-.arrow-button::before,
-.arrow-button::after {
+.button-arrow::before,
+.button-arrow::after {
   content: '';
   width: 14px;
   height: 3px;
@@ -45,24 +22,24 @@
   transition: background-color 0.5s;
 }
 
-.arrow-button::before {
+.button-arrow::before {
   border-radius: 3px 0px 0px 0px;
   transform: rotate(-30deg);
   transform-origin: center left;
 }
 
-.arrow-button::after {
+.button-arrow::after {
   border-radius: 0px 0px 0px 3px;
   transform: rotate(30deg);
   transform-origin: center left;
 }
 
-.arrow-button_active {
+.button-arrow_active {
   opacity: 1;
   cursor: pointer;
 }
 
-.arrow-button_active:hover::before,
-.arrow-button_active:hover::after {
+.button-arrow_active:hover::before,
+.button-arrow_active:hover::after {
   background-color: var(--text);
 }

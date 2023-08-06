@@ -1,11 +1,16 @@
 @import 'normalize.css';
 @import 'nullstyles.css';
-@import 'side-bar.css';
-@import 'buttons.css';
+@import 'button-arrow.css';
+@import 'button-close.css';
+@import 'button.css';
 @import 'panels.css';
+@import 'side-bar.css';
+@import 'search-form.css';
+@import 'search-panel.css';
+@import 'theme-switcher.css';
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap');
 
-:root {
+.app {
   --text: #48484A;
   --hint: #ACACAC;
   --very-hint: #D3D3D3;
@@ -13,6 +18,22 @@
   --panel: #FFF;
   --switcher-theme-color: #48484A;
   --switcher-theme-moon: #E6E6E6;
+
+  font-size: 14px;
+  font-family: 'Rubik', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--text);
+  background-color: var(--background);
+  transition: none !important;
+
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
 
 .dark-mode {
@@ -25,26 +46,6 @@
   --switcher-theme-moon: #212331;
 }
 
-body {
-  font-size: 14px;
-  font-family: 'Rubik', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  color: var(--text);
-  background-color: var(--background);
-  transition: none !important;
-}
-
-.app {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-}
-
 .container {
   width: 100vw;
   height: 720px;
@@ -53,6 +54,7 @@ body {
   display: flex;
   flex-direction: row;
   position: relative;
+  z-index: 1;
 }
 
 .main {
@@ -64,32 +66,32 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  gap: 38px;
 }
 
-.main__switchers {
-  margin-bottom: 25px;
-  align-self: flex-start;
+.tabs {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-.switchers {
+.tabs__header {
   display: flex;
-  align-items: center;
   gap: 24px;
 }
 
-.switchers__title {
+.tabs__title {
   font-weight: 700;
   font-size: 24px;
 }
 
-.switchers__nav {
+.tabs__nav {
   display: flex;
   gap: 16px;
 }
 
-.switchers__button {
+.tabs__button {
   font-size: 20px;
   font-weight: 700;
   color: var(--hint);
@@ -98,18 +100,18 @@ body {
   position: relative;
 }
 
-.switchers__button:hover {
+.tabs__button:hover {
   color: var(--text);
 }
 
-.switchers__button_active {
+.tabs__button_active {
   color: var(--text);
   cursor: text;
   position: relative;
 }
 
-.switchers__button::after,
-.switchers__button_active::after {
+.tabs__button::after,
+.tabs__button_active::after {
   content: '';
   height: 3px;
   width: 0;
@@ -117,24 +119,28 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -9px;
+  bottom: -7px;
   opacity: 0;
   transition: opacity 0.5s, width 0.5s;
   cursor: default;
 }
 
-.switchers__button_active::after {
+.tabs__button_active::after {
   width: 100%;
   opacity: 1;
 }
 
-.main__swiper {
-  margin-bottom: 38px;
-  max-width: 100%;
+.tabpanel {
+  display: none;
+}
+
+.tabpanel_shown {
+  display: block;
 }
 
 .swiper {
   width: 100%;
+  max-width: 100%;
   position: relative;
 }
 
@@ -155,20 +161,12 @@ body {
 }
 
 .swiper__items {
-  display: none;
-}
-
-.swiper__items_shown {
   width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 24px;
   overflow: hidden;
 }
-
-/* .swiper__item_hidden {
-  display: none;
-} */
 
 .today-panels {
   width: 100%;
