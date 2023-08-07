@@ -1,6 +1,6 @@
 import React from "react";
 
-function Button({ block, size, type, onClick, children }) {
+export function Button({ block, size, type, onClick, children }) {
   const className = [
     block ? `${block}__button` : "",
     "button",
@@ -17,5 +17,3 @@ function Button({ block, size, type, onClick, children }) {
     </button>
   );
 }
-
-export default Button;

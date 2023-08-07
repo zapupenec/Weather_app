@@ -1,6 +1,6 @@
 import React from "react";
 
-function TabPanel({ activeTabId, id, children }) {
+export function TabPanel({ activeTabId, id, children }) {
   const tabClassName = [
     id === activeTabId ? "tabpanel_shown" : "tabpanel",
   ].join(" ").trim();
@@ -13,5 +13,3 @@ function TabPanel({ activeTabId, id, children }) {
     >{children}</div>
   );
 }
-
-export default TabPanel;

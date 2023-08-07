@@ -1,6 +1,6 @@
 import React from "react";
 
-function Tab({ tabContext, id, children }) {
+export function Tab({ tabContext, id, children }) {
   const { activeTabId, handlerClick } = tabContext;
 
   const tabClassName = [
@@ -17,5 +17,3 @@ function Tab({ tabContext, id, children }) {
     >{children}</button>
   );
 }
-
-export default Tab;

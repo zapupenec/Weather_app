@@ -1,10 +1,10 @@
 import React from "react";
-import { Button } from "../components";
+import { Button } from ".";
 
-function searchForm({ searchFieldRef }) {
+export function SearchForm({ searchFieldRef }) {
   const handlerSubmit = (e) => {
     e.preventDefault();
-  }
+  };
 
   return (
     <form className="search-form" onSubmit={handlerSubmit}>
@@ -13,5 +13,3 @@ function searchForm({ searchFieldRef }) {
     </form>
   );
 }
-
-export default searchForm;

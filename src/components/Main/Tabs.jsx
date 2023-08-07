@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Tab, TabPanel } from "../components";
+import { Tab, TabPanel } from ".";
 
-function Tabs({ tabNames, children }) {
+export function Tabs({ tabNames, children }) {
   const [activeTabId, setActiveTabId] = useState("days");
 
   const handlerClick = (currentId) => () => setActiveTabId(currentId);
@@ -23,5 +23,3 @@ function Tabs({ tabNames, children }) {
     </div>
   );
 }
-
-export default Tabs;

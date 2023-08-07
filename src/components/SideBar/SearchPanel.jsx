@@ -1,7 +1,7 @@
 import React from "react";
-import { SearchForm } from "../components";
+import { SearchForm } from ".";
 
-function SearchPanel({ state, setState, block, searchFieldRef }) {
+export function SearchPanel({ state, setState, block, searchFieldRef }) {
   const searchPanelClassName = [
     block ? `${block}__search-panel` : "",
     "search-panel",
@@ -15,5 +15,3 @@ function SearchPanel({ state, setState, block, searchFieldRef }) {
     </div>
   );
 }
-
-export default SearchPanel;

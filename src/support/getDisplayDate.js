@@ -2,7 +2,7 @@ const getDisplayForecastDay = (date, today) => {
   const year = date.getFullYear();
   const month = `${date.getMonth() + 1}`.padStart(2, '0');
   const day = `${date.getDate()}`.padStart(2, '0');
-  const datatime = `${year}-${month}-${day}`;
+  const dataTime = `${year}-${month}-${day}`;
 
   let dateDisplay;
   if (!!today && date.getDate() - today.getDate() === 1) {
@@ -17,7 +17,7 @@ const getDisplayForecastDay = (date, today) => {
   }
 
   return {
-    datatime,
+    dataTime,
     dateDisplay,
   };
 };

@@ -1,9 +1,9 @@
 import React, { useRef, useState, useContext } from "react";
-import { Button, SearchPanel, ThemeSwitcher } from "../components";
-import { forecastContext } from "./contexts";
-import getDisplayForecastDay from "../getDisplayDate";
+import { Button, SearchPanel, ThemeSwitcher } from ".";
+import { forecastContext } from "../../contexts";
+import getDisplayForecastDay from "../../support/getDisplayDate";
 
-function SideBar({darkModeContext}) {
+export function SideBar() {
   const [searchPanelState, setSearchPanelState] = useState('hidden');
   const searchFieldRef = useRef();
 
@@ -30,7 +30,7 @@ function SideBar({darkModeContext}) {
       <SearchPanel state={searchPanelState} setState={toggleSearchPanelState} block="side-bar" searchFieldRef={searchFieldRef} />
       <div className="side-bar__buttons-row">
         <Button type="button" onClick={toggleSearchPanelState('shown')}>Поиск города</Button>
-        <ThemeSwitcher darkModeContext={darkModeContext} />
+        <ThemeSwitcher />
       </div>
       <div className="side-bar__bgWeather">
         <img className="side-bar__imageWeather" src="./image/snowflake.svg" alt="snowflake.svg" />
@@ -46,5 +46,3 @@ function SideBar({darkModeContext}) {
     </section>
   );
 }
-
-export default SideBar;
