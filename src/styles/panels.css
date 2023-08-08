@@ -31,7 +31,7 @@
 }
 
 .panel-day__temperature-night {
-  color: var(--very-hint);
+  color: var(--text-very-hint);
 }
 
 .panel-extra {

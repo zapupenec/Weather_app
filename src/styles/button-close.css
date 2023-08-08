@@ -15,7 +15,7 @@
   display: block;
   width: 34px;
   height: 3px;
-  background-color: var(--hint);
+  background-color: var(--border);
   position: absolute;
   transition: all 0.5s;
 }

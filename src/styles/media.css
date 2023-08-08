@@ -54,7 +54,7 @@
     height: 100vh;
   }
 
-  .search-panel__search-form {
+  .search-form {
     flex-direction: column;
   }
 
@@ -110,7 +110,7 @@
     display: none;
   }
 
-  .search-panel__search-form {
+  .search-form {
     flex-direction: row;
   }
 
@@ -177,7 +177,7 @@
 }
 
 @media (max-width: 540px) {
-  .search-panel__search-form {
+  .search-form {
     flex-direction: column;
   }
 }

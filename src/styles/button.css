@@ -7,7 +7,7 @@
   font-size: 18px;
   text-align: center;
   border-radius: 10px;
-  border: 2px solid var(--hint);
+  border: 2px solid var(--border);
   background: var(--panel);
   color: inherit;
   transition: border-color 0.5s;

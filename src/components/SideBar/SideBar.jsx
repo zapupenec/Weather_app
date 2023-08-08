@@ -1,15 +1,22 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Button, SearchPanel, ThemeSwitcher } from ".";
 import { forecastContext } from "../../contexts";
 import getDisplayForecastDay from "../../support/getDisplayDate";
 
 export function SideBar() {
   const [searchPanelState, setSearchPanelState] = useState('hidden');
-  const searchFieldRef = useRef();
-
-  const toggleSearchPanelState = (state) => () => {
+  const searchInputRef = useRef();
+  const handlerSearchPanelState = (state) => () => {
     setSearchPanelState(state);
-    searchFieldRef.current.focus();
+    if (state === 'shown') {
+      searchInputRef.current.focus();
+    }
+  };
+ 
+  const [activeCity, setActiveCity] = useState('Москва');
+  const handlerActiveCity = (city) => () => {
+    setActiveCity(city);
+    handlerSearchPanelState('hidden')();
   };
 
   const { forecast } = useContext(forecastContext);
@@ -27,9 +34,16 @@ export function SideBar() {
 
   return (
     <section className="side-bar">
-      <SearchPanel state={searchPanelState} setState={toggleSearchPanelState} block="side-bar" searchFieldRef={searchFieldRef} />
+      <SearchPanel
+        block="side-bar"
+        activeCity={activeCity}
+        handlerActiveCity={handlerActiveCity}
+        searchPanelState={searchPanelState}
+        handlerSearchPanelState={handlerSearchPanelState}
+        searchInputRef={searchInputRef}
+      />
       <div className="side-bar__buttons-row">
-        <Button type="button" onClick={toggleSearchPanelState('shown')}>Поиск города</Button>
+        <Button type="button" onClick={handlerSearchPanelState('shown')}>Поиск города</Button>
         <ThemeSwitcher />
       </div>
       <div className="side-bar__bgWeather">
@@ -42,7 +56,7 @@ export function SideBar() {
         <p>Сегодня</p>
         <time dateTime={datatime}>{dateDisplay}</time>
       </div>
-      <p className="side-bar__location">Москва</p>
+      <p className="side-bar__location">{activeCity}</p>
     </section>
   );
 }

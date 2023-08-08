@@ -1,3 +1,3 @@
 import { useThemeSwitcher } from "./useThemeSwitcher";
 
-export { useThemeSwitcher};
+export { useThemeSwitcher };

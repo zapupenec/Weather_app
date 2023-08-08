@@ -17,8 +17,50 @@
   align-self: end;
 }
 
-.search-form {
+.search-history {
   display: flex;
-  flex-direction: row;
-  gap: 22px;
+  flex-direction: column;
+  gap: 10px;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.search-history__item {
+  color: var(--text);
+  padding: 25px 60px 25px 25px;
+  border-radius: 10px;
+  background-color: var(--panel);
+  cursor: pointer;
+  word-break: break-all;
+  transition: background-color 0.5s;
+  position: relative;
+}
+
+.search-history__item::after {
+  content: '';
+  width: 11px;
+  height: 15px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 30px;
+  background: no-repeat url('../../public/image/arrow-active-search-history.svg');
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.search-history__item:hover {
+  background-color: var(--bg-item-history);
+  cursor: pointer;
+}
+
+.search-history__item_active {
+  background-color: var(--bg-item-history);
+  cursor: default;
+}
+
+.search-history__item:hover::after,
+.search-history__item_active::after {
+  opacity: 1;
 }

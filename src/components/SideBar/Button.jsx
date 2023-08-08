@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Button({ block, size, type, onClick, children }) {
+export function Button({ block, size, type, onClick, children, btnSubmitRef }) {
   const className = [
     block ? `${block}__button` : "",
     "button",
@@ -12,6 +12,7 @@ export function Button({ block, size, type, onClick, children }) {
       className={className}
       type={type}
       onClick={onClick}
+      ref={btnSubmitRef}
     >
       {children}
     </button>

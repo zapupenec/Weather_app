@@ -13,7 +13,7 @@
   content: '';
   width: 14px;
   height: 3px;
-  background-color: var(--hint);
+  background-color: var(--border);
   position: absolute;
   top: 50%;
   margin-top: -1.5px;

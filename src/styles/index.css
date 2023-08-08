@@ -12,11 +12,13 @@
 
 .app {
   --text: #48484A;
-  --hint: #ACACAC;
-  --very-hint: #D3D3D3;
-  --background: #F1F1F1;
+  --text-hint: #ACACAC;
+  --text-very-hint: #D3D3D3;
   --panel: #FFF;
-  --switcher-theme-color: #48484A;
+  --border: #ACACAC;
+  --background-main: #F1F1F1;
+  --bg-item-history: #E6E6E6;
+  --switcher-theme-bg: #48484A;
   --switcher-theme-moon: #E6E6E6;
 
   font-size: 14px;
@@ -25,7 +27,7 @@
   font-weight: 400;
   line-height: normal;
   color: var(--text);
-  background-color: var(--background);
+  background-color: var(--background-main);
   transition: none !important;
 
   width: 100vw;
@@ -38,11 +40,13 @@
 
 .dark-mode {
   --text: #E6E6E6;
-  --hint: #ACACAC;
-  --very-hint: #6D6D6D;
-  --background: #100E1C;
+  --text-hint: #6D6D6D;
+  --text-very-hint: #6D6D6D;
   --panel: #212331;
-  --switcher-theme-color: #EC6E4D;
+  --border: #ACACAC;
+  --background-main: #100E1C;
+  --bg-item-history: #100E1C;
+  --switcher-theme-bg: #EC6E4D;
   --switcher-theme-moon: #212331;
 }
 
@@ -94,7 +98,7 @@
 .tabs__button {
   font-size: 20px;
   font-weight: 700;
-  color: var(--hint);
+  color: var(--text-hint);
   background: none;
   transition: color 0.5s;
   position: relative;

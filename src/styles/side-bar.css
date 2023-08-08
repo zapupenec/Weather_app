@@ -78,7 +78,7 @@
 .side-bar__feeling {
   margin-bottom: 80px;
 
-  color: var(--hint);
+  color: var(--text-hint);
   font-size: 18px;
 }
 
@@ -89,15 +89,15 @@
   display: flex;
   justify-content: space-around;
 
-  color: var(--hint);
+  color: var(--text-hint);
   font-size: 18px;
 }
 
 .side-bar__location {
   margin-left: 12px;
   font-size: 18px;
-  color: var(--hint);
-
+  color: var(--text-hint);
+  word-break: break-all;
   position: relative;
 }
 
