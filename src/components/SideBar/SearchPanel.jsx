@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import { SearchForm, SearchHistory } from ".";
+import { ErrorProvider, WeatherAppContext } from "../../contexts";
 
-export function SearchPanel({ block, activeCity, handlerActiveCity, searchPanelState, handlerSearchPanelState, searchInputRef }) {
+export function SearchPanel({ block }) {
+  const {
+    searchPanelState,
+    handlerSearchPanelState,
+  } = useContext(WeatherAppContext);
+
   const [searchHistory, setSearcHistory] = useState([]);
   const addSeachHistory = (cityName) => {
     const maxLength = 5;
@@ -10,7 +16,7 @@ export function SearchPanel({ block, activeCity, handlerActiveCity, searchPanelS
       return;
     }
     setSearcHistory([cityName, ...searchHistory.slice(0, -1)]);
-  }
+  };
 
   const searchPanelClassName = [
     block ? `${block}__search-panel` : "",
@@ -26,17 +32,15 @@ export function SearchPanel({ block, activeCity, handlerActiveCity, searchPanelS
         id="button-close-search-panel"
         onClick={handlerSearchPanelState('hidden')}
       />
-      <SearchForm
-        handlerActiveCity={handlerActiveCity}
-        searchInputRef={searchInputRef}
-        searchHistory={searchHistory}
-        addSeachHistory={addSeachHistory}
-      />
-      {searchHistory.length !== 0 && <SearchHistory
-        history={searchHistory}
-        activeCity={activeCity}
-        handlerActiveCity={handlerActiveCity}
-      />}
+      <ErrorProvider>
+        <SearchForm
+          searchHistory={searchHistory}
+          addSeachHistory={addSeachHistory}
+        />
+        {searchHistory.length !== 0 && <SearchHistory
+          history={searchHistory}
+        />}
+      </ErrorProvider>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { forecastContext } from "../../contexts";
+import { WeatherAppContext } from "../../contexts";
+import { Loader } from '.';
 
 const getBodyPanelExtra = (typePanelExtra, forecast) => {
   const {
@@ -46,7 +47,7 @@ const getBodyPanelExtra = (typePanelExtra, forecast) => {
 };
 
 export function PanelExtra({ type, size }) {
-  const { forecast } = useContext(forecastContext);
+  const { forecast, formState } = useContext(WeatherAppContext);
 
   const panelExtraClassName = [
     "panel-extra",
@@ -55,7 +56,7 @@ export function PanelExtra({ type, size }) {
 
   return (
     <article className={panelExtraClassName}>
-      {getBodyPanelExtra(type, forecast)}
+      {formState === 'waiting' ? <Loader /> : getBodyPanelExtra(type, forecast)}
     </article>
   );
 }

@@ -1,7 +1,11 @@
-import { createContext } from "react";
+import { ErrorContext } from './ErrorContext';
+import { ErrorProvider } from './ErrorProvider';
+import { WeatherAppContext } from './WeatherAppContext';
+import { WeatherAppProvider } from './WeatherAppProvider';
 
-const forecastContext = createContext({
-  forecast: {},
-})
-
-export { forecastContext };
+export {
+  ErrorContext,
+  ErrorProvider,
+  WeatherAppContext,
+  WeatherAppProvider,
+};

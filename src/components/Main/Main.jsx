@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Tabs, Swiper, PanelDay, PanelExtra, PanelHour } from ".";
-import { forecastContext } from "../../contexts";
+import { WeatherAppContext } from "../../contexts";
 
 export function Main() {
-  const { forecast } = useContext(forecastContext);
+  const { forecast } = useContext(WeatherAppContext);
   const { today, days, hours } = forecast;
 
   return (

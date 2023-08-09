@@ -1,3 +1,4 @@
+import { Loader } from "./Loader";
 import { Main } from "./Main";
 import { PanelDay } from "./PanelDay";
 import { PanelExtra } from "./PanelExtra";
@@ -8,6 +9,7 @@ import { TabPanel } from "./TabPanel";
 import { Tabs } from "./Tabs";
 
 export {
+  Loader,
   Main,
   PanelDay,
   PanelExtra,

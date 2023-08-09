@@ -1,63 +1,57 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { Button } from ".";
+import { ErrorContext, WeatherAppContext } from "../../contexts";
+import { requestForecast, requestLocation } from "../../support";
 
-const getRequestUrl = (city) => {
-  const newUrl = new URL('https://nominatim.openstreetmap.org');
-  newUrl.pathname = `/search`;
-  newUrl.searchParams.set('format', 'json');
-  newUrl.searchParams.set('namedetails', '1');
-  newUrl.searchParams.set('limit', '1');
-  newUrl.searchParams.set('q', city);
-  return newUrl;
-};
+const hasLocation = (searchHistory, location) => !!searchHistory.find((log) => log.cityName === location.cityName);
 
-export function SearchForm({ handlerActiveCity, searchInputRef, searchHistory, addSeachHistory }) {
-  const [formState, setFormState] = useState('filling');
+export function SearchForm({ searchHistory, addSeachHistory }) {
+  const {
+    handlerSearchPanelState,
+    handlerCurrentLocation,
+    searchInputRef,
+    setFormState,
+  } = useContext(WeatherAppContext);
+
+  const { error, setError } = useContext(ErrorContext);
+
   const [searchValue, setSearchValue] = useState('');
-  const [error, setError] = useState([]);
   const btnSubmitRef = useRef();
-
-  const handlerFormState = (state) => {
-    setFormState(state);
-    switch (state) {
-      case 'filling':
-        searchInputRef.current.disabled = false;
-        btnSubmitRef.current.disabled = false;
-        break;
-      case 'sending':
-        searchInputRef.current.disabled = true;
-        btnSubmitRef.current.disabled = true;
-        break;
-      default:
-        throw new Error(`Unknown formState: ${state}`);
-    }
-  };
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
+
+    setFormState('waiting');
+    setError('');
+
+    searchInputRef.current.disabled = true;
+    btnSubmitRef.current.disabled = true;
+
     try {
-      handlerFormState('sending');
-      setError('');
-      const response = await fetch(getRequestUrl(searchValue));
-      const data = await response.json();
-      const cityName = data[0].namedetails['name:ru'] || data[0].namedetails['name:en'] || data[0].namedetails['name'];
+      const location = await requestLocation(searchValue)
+      console.log(await requestForecast(location));
+
+      handlerCurrentLocation(location)();
       setSearchValue('');
-      handlerActiveCity(cityName)();
-      if (!searchHistory.includes(cityName)) {
-        addSeachHistory(cityName);
+
+      if (!hasLocation(searchHistory, location)) {
+        addSeachHistory(location);
       }
-      handlerFormState('filling');
+
+      handlerSearchPanelState('hidden')();
     } catch (error) {
       if (error.message === 'Failed to fetch') {
         setError('Ошибка сети!');
-        console.error(error);
-        return;
+      } else {
+        setError('Упс! Город не найден, попробуйте другой');
       }
-      handlerFormState('filling');
       searchInputRef.current.focus();
-      setError('Упс! Город не найден, попробуйте другой');
       console.error(error);
     }
+
+    setFormState('filling');
+    searchInputRef.current.disabled = false;
+    btnSubmitRef.current.disabled = false;
   };
 
   const handlerChange = async ({ target }) => {
@@ -72,7 +66,6 @@ export function SearchForm({ handlerActiveCity, searchInputRef, searchHistory, a
           type="search"
           name="search"
           placeholder="Поиск"
-          id="search-field"
           ref={searchInputRef}
           value={searchValue}
           onChange={handlerChange}

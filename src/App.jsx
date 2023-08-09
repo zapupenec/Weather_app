@@ -1,16 +1,15 @@
 import React from "react";
 import { SideBar, Main } from "./components";
-import { forecastContext } from "./contexts";
-import forecast from "./contexts/mock";
+import { WeatherAppProvider } from "./contexts";
 
 export function App() {
   return (
     <div className="app">
       <div className="container">
-        <forecastContext.Provider value={{ forecast }}>
+        <WeatherAppProvider>
           <SideBar />
           <Main />
-        </forecastContext.Provider>
+        </WeatherAppProvider>
       </div>
     </div>
   );

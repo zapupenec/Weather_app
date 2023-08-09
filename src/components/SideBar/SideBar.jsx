@@ -1,25 +1,14 @@
-import React, { useContext, useRef, useState } from "react";
+import { useContext } from "react";
 import { Button, SearchPanel, ThemeSwitcher } from ".";
-import { forecastContext } from "../../contexts";
-import getDisplayForecastDay from "../../support/getDisplayDate";
+import { WeatherAppContext } from "../../contexts";
+import { getDisplayForecastDay } from "../../support";
 
 export function SideBar() {
-  const [searchPanelState, setSearchPanelState] = useState('hidden');
-  const searchInputRef = useRef();
-  const handlerSearchPanelState = (state) => () => {
-    setSearchPanelState(state);
-    if (state === 'shown') {
-      searchInputRef.current.focus();
-    }
-  };
- 
-  const [activeCity, setActiveCity] = useState('Москва');
-  const handlerActiveCity = (city) => () => {
-    setActiveCity(city);
-    handlerSearchPanelState('hidden')();
-  };
+  const { forecast,
+    handlerSearchPanelState,
+    currentLocation,
+  } = useContext(WeatherAppContext);
 
-  const { forecast } = useContext(forecastContext);
   const {
     date,
     description,
@@ -36,11 +25,6 @@ export function SideBar() {
     <section className="side-bar">
       <SearchPanel
         block="side-bar"
-        activeCity={activeCity}
-        handlerActiveCity={handlerActiveCity}
-        searchPanelState={searchPanelState}
-        handlerSearchPanelState={handlerSearchPanelState}
-        searchInputRef={searchInputRef}
       />
       <div className="side-bar__buttons-row">
         <Button type="button" onClick={handlerSearchPanelState('shown')}>Поиск города</Button>
@@ -56,7 +40,7 @@ export function SideBar() {
         <p>Сегодня</p>
         <time dateTime={datatime}>{dateDisplay}</time>
       </div>
-      <p className="side-bar__location">{activeCity}</p>
+      <p className="side-bar__location">{currentLocation.cityName}</p>
     </section>
   );
 }
