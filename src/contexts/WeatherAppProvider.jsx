@@ -9,7 +9,7 @@ export const WeatherAppProvider = ({ children }) => {
   const [searchPanelState, setSearchPanelState] = useState('hidden');
   const searchInputRef = useRef();
 
-  const handlerSearchPanelState = (state) => () => {
+  const handleSearchPanelState = (state) => () => {
     setSearchPanelState(state);
     if (state === 'shown') {
       searchInputRef.current.focus();
@@ -17,7 +17,7 @@ export const WeatherAppProvider = ({ children }) => {
   };
 
   const [currentLocation, setCurrentLocation] = useState({});
-  const handlerCurrentLocation = (city) => () => {
+  const handleCurrentLocation = (city) => () => {
     setCurrentLocation(city);
   }
 
@@ -30,7 +30,7 @@ export const WeatherAppProvider = ({ children }) => {
       const date = new Date();
       const location = await requestLocation('Москва');
 
-      handlerCurrentLocation(location)();
+      handleCurrentLocation(location)();
       const dataForecast = await requestForecast(location);
 
       const main = parseMainForecast(dataForecast);
@@ -47,9 +47,9 @@ export const WeatherAppProvider = ({ children }) => {
     formState,
     setFormState,
     searchPanelState,
-    handlerSearchPanelState,
+    handleSearchPanelState,
     currentLocation,
-    handlerCurrentLocation,
+    handleCurrentLocation,
     searchInputRef,
   };
 

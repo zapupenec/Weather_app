@@ -4,7 +4,7 @@ import { Tab, TabPanel } from ".";
 export function Tabs({ tabNames, children }) {
   const [activeTabId, setActiveTabId] = useState("days");
 
-  const handlerClick = (currentId) => () => setActiveTabId(currentId);
+  const handleClick = (currentId) => () => setActiveTabId(currentId);
 
   return (
     <div className="tabs">
@@ -12,7 +12,7 @@ export function Tabs({ tabNames, children }) {
         <h1 className="tabs__title">Прогноз</h1>
         <nav className="tabs__nav">
           {React.Children.map(children, (child) => {
-            return <Tab tabContext={{ activeTabId, handlerClick }} id={child.key}>{tabNames[child.key]}</Tab>
+            return <Tab tabContext={{ activeTabId, handleClick }} id={child.key}>{tabNames[child.key]}</Tab>
           })}
         </nav>
       </div>

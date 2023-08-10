@@ -70,9 +70,9 @@
 
 .side-bar__description {
   margin-bottom: 15px;
-
   font-size: 36px;
   font-weight: 700;
+  text-align: center;
 }
 
 .side-bar__feeling {

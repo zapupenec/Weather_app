@@ -5,7 +5,7 @@ import { ErrorProvider, WeatherAppContext } from "../../contexts";
 export function SearchPanel({ block }) {
   const {
     searchPanelState,
-    handlerSearchPanelState,
+    handleSearchPanelState,
   } = useContext(WeatherAppContext);
 
   const [searchHistory, setSearcHistory] = useState([]);
@@ -30,7 +30,7 @@ export function SearchPanel({ block }) {
         className="search-panel__button-close button-close"
         type="button"
         id="button-close-search-panel"
-        onClick={handlerSearchPanelState('hidden')}
+        onClick={handleSearchPanelState('hidden')}
       />
       <ErrorProvider>
         <SearchForm

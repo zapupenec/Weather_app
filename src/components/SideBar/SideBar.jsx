@@ -8,7 +8,7 @@ export function SideBar() {
   const {
     formState,
     forecast,
-    handlerSearchPanelState,
+    handleSearchPanelState,
     currentLocation,
   } = useContext(WeatherAppContext);
 
@@ -33,7 +33,7 @@ export function SideBar() {
         block="side-bar"
       />
       <div className="side-bar__buttons-row">
-        <Button type="button" onClick={handlerSearchPanelState('shown')}>Поиск города</Button>
+        <Button type="button" onClick={handleSearchPanelState('shown')}>Поиск города</Button>
         <ThemeSwitcher />
       </div>
       {formState === 'waiting' ? <Loader /> : (

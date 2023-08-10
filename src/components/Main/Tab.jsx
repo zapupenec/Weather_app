@@ -1,7 +1,7 @@
 import React from "react";
 
 export function Tab({ tabContext, id, children }) {
-  const { activeTabId, handlerClick } = tabContext;
+  const { activeTabId, handleClick } = tabContext;
 
   const tabClassName = [
     "tabs__button",
@@ -13,7 +13,7 @@ export function Tab({ tabContext, id, children }) {
       className={tabClassName}
       role="tab"
       aria-controls={id}
-      onClick={handlerClick(id)}
+      onClick={handleClick(id)}
     >{children}</button>
   );
 }

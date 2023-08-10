@@ -8,8 +8,8 @@ const hasLocation = (searchHistory, location) => !!searchHistory.find((log) => l
 export function SearchForm({ searchHistory, addSeachHistory }) {
   const {
     setForecast,
-    handlerSearchPanelState,
-    handlerCurrentLocation,
+    handleSearchPanelState,
+    handleCurrentLocation,
     searchInputRef,
     setFormState,
   } = useContext(WeatherAppContext);
@@ -19,7 +19,7 @@ export function SearchForm({ searchHistory, addSeachHistory }) {
   const [searchValue, setSearchValue] = useState('');
   const btnSubmitRef = useRef();
 
-  const handlerSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setFormState('waiting');
@@ -36,14 +36,14 @@ export function SearchForm({ searchHistory, addSeachHistory }) {
       const main = parseMainForecast(dataForecast);
       setForecast((prevForecast) => ({ ...prevForecast, date, main }))
 
-      handlerCurrentLocation(location)();
+      handleCurrentLocation(location)();
       setSearchValue('');
 
       if (!hasLocation(searchHistory, location)) {
         addSeachHistory(location);
       }
 
-      handlerSearchPanelState('hidden')();
+      handleSearchPanelState('hidden')();
     } catch (error) {
       if (error.message === 'Failed to fetch') {
         setError('Ошибка сети!');
@@ -59,12 +59,12 @@ export function SearchForm({ searchHistory, addSeachHistory }) {
     btnSubmitRef.current.disabled = false;
   };
 
-  const handlerChange = async ({ target }) => {
+  const handleChange = async ({ target }) => {
     setSearchValue(target.value);
   };
 
   return (
-    <form className="search-form" onSubmit={handlerSubmit}>
+    <form className="search-form" onSubmit={handleSubmit}>
       <div className="search-form__search-field">
         <input
           className="search-form__search-input"
@@ -73,7 +73,7 @@ export function SearchForm({ searchHistory, addSeachHistory }) {
           placeholder="Поиск"
           ref={searchInputRef}
           value={searchValue}
-          onChange={handlerChange}
+          onChange={handleChange}
         />
         <span className="search-form__search-border"></span>
       </div>
