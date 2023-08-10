@@ -20,6 +20,8 @@
   --bg-item-history: #E6E6E6;
   --switcher-theme-bg: #48484A;
   --switcher-theme-moon: #E6E6E6;
+  --progess-bar: #EC6E4D;
+  --progess-bar-bg: #D3D3D3;
 
   font-size: 14px;
   font-family: 'Rubik', sans-serif;
@@ -48,6 +50,8 @@
   --bg-item-history: #100E1C;
   --switcher-theme-bg: #EC6E4D;
   --switcher-theme-moon: #212331;
+  --progess-bar: #EC6E4D;
+  --progess-bar-bg: #E6E6E6;
 }
 
 .container {

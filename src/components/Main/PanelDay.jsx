@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { getDisplayForecastDay } from '../../support';
 import { WeatherAppContext } from '../../contexts';
-import { Loader } from '.';
+import { Loader } from '..';
 
-export function PanelDay({ today, forecastDay }) {
+export function PanelDay({ date, forecastDay }) {
   const {
     dataTime,
     dateDisplay,
-  } = getDisplayForecastDay(forecastDay.date, today.date,);
+  } = getDisplayForecastDay(forecastDay.date, date);
 
   const { formState } = useContext(WeatherAppContext);
 

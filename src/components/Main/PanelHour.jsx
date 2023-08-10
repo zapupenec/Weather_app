@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { WeatherAppContext } from "../../contexts";
-import { Loader } from '.';
+import { Loader } from '..';
 
 export function PanelHour({ forecastHour }) {
   const hours = forecastHour.time === 0 ? forecastHour.time : `${forecastHour.time}`.padStart(2, '0');

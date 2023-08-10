@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { WeatherAppContext } from "../../contexts";
-import { Loader } from '.';
+import { Loader } from '..';
+import { ProgressBar } from "./ProgressBar";
 
 const getBodyPanelExtra = (typePanelExtra, forecast) => {
   const {
@@ -9,7 +10,7 @@ const getBodyPanelExtra = (typePanelExtra, forecast) => {
     humidity,
     visibility,
     pressure,
-  } = forecast.today;
+  } = forecast.main;
 
   switch (typePanelExtra) {
     case "wind":
@@ -25,6 +26,7 @@ const getBodyPanelExtra = (typePanelExtra, forecast) => {
         <>
           <p className="panel-extra__title">Влажность</p>
           <p className="panel-extra__info">{humidity} <span className="panel-extra__measure">%</span></p>
+          <ProgressBar value={humidity}/>
         </>
       );
     case "visibility":

@@ -4,13 +4,13 @@ import { WeatherAppContext } from "../../contexts";
 
 export function Main() {
   const { forecast } = useContext(WeatherAppContext);
-  const { today, days, hours } = forecast;
+  const { date, days, hours } = forecast;
 
   return (
     <main className="main">
       <Tabs tabNames={{ days: "на неделю", hours: "почасовой" }}>
         <Swiper key="days">
-          {days.map((forecastDay, i) => <PanelDay key={i} today={today} forecastDay={forecastDay} />)}
+          {days.map((forecastDay, i) => <PanelDay key={i} date={date} forecastDay={forecastDay} />)}
         </Swiper>
 
         <Swiper key="hours">

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { WeatherAppContext } from './WeatherAppContext';
-import { requestForecast, requestLocation } from '../support';
-import forecast from './mock'
+import { parseMainForecast, requestForecast, requestLocation } from '../support';
+import mockForecast from './mock'
 
 export const WeatherAppProvider = ({ children }) => {
   const [formState, setFormState] = useState('filling'); // filling, waiting
@@ -21,13 +21,21 @@ export const WeatherAppProvider = ({ children }) => {
     setCurrentLocation(city);
   }
 
+  const [forecast, setForecast] = useState(mockForecast);
+
   useEffect(() => {
     setFormState('waiting');
 
     async function fetchData() {
+      const date = new Date();
       const location = await requestLocation('Москва');
+
       handlerCurrentLocation(location)();
-      console.log(await requestForecast(location));
+      const dataForecast = await requestForecast(location);
+
+      const main = parseMainForecast(dataForecast);
+      setForecast((prevForecast) => ({ ...prevForecast, date, main }))
+
       setFormState('filling');
     }
     fetchData();
@@ -35,6 +43,7 @@ export const WeatherAppProvider = ({ children }) => {
 
   const providedData = {
     forecast,
+    setForecast,
     formState,
     setFormState,
     searchPanelState,

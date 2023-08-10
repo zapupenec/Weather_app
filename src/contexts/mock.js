@@ -1,6 +1,6 @@
 const forecast = {
-  today: {
-    date: new Date('March 13, 2016 14:00:00'),
+  date: new Date(),
+  main: {
     description: 'Снег',
     temperature: 1,
     feeling: -3,
@@ -102,13 +102,13 @@ const forecast = {
 };
 
 forecast.days = forecast.days.map((dataDay, i) => {
-  dataDay.date = new Date(forecast.today.date);
+  dataDay.date = new Date(forecast.date);
   dataDay.date.setDate(dataDay.date.getDate() + 1 + i);
   return dataDay;
 });
 
 forecast.hours = forecast.hours.map((dataDay, i) => {
-  const date = new Date(forecast.today.date);
+  const date = new Date(forecast.date);
   date.setHours(date.getHours() + 1 + i);
   dataDay.time = date.getHours();
   return dataDay;

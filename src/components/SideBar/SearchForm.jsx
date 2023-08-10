@@ -1,12 +1,13 @@
 import { useRef, useState, useContext } from "react";
 import { Button } from ".";
 import { ErrorContext, WeatherAppContext } from "../../contexts";
-import { requestForecast, requestLocation } from "../../support";
+import { parseMainForecast, requestForecast, requestLocation } from "../../support";
 
 const hasLocation = (searchHistory, location) => !!searchHistory.find((log) => log.cityName === location.cityName);
 
 export function SearchForm({ searchHistory, addSeachHistory }) {
   const {
+    setForecast,
     handlerSearchPanelState,
     handlerCurrentLocation,
     searchInputRef,
@@ -28,8 +29,12 @@ export function SearchForm({ searchHistory, addSeachHistory }) {
     btnSubmitRef.current.disabled = true;
 
     try {
+      const date = new Date();
       const location = await requestLocation(searchValue)
-      console.log(await requestForecast(location));
+      const dataForecast = await requestForecast(location);
+
+      const main = parseMainForecast(dataForecast);
+      setForecast((prevForecast) => ({ ...prevForecast, date, main }))
 
       handlerCurrentLocation(location)();
       setSearchValue('');

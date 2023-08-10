@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { ErrorContext, WeatherAppContext } from "../../contexts";
-import { requestForecast } from "../../support";
+import { parseMainForecast, requestForecast } from "../../support";
 
 export function SearchHistory({ history }) {
   const {
+    setForecast,
     currentLocation,
     handlerCurrentLocation,
     handlerSearchPanelState,
@@ -15,7 +16,12 @@ export function SearchHistory({ history }) {
   const handlerClick = (location) => async () => {
     setFormState('waiting');
     try {
-      console.log(await requestForecast(location));
+      const date = new Date();
+      const dataForecast = await requestForecast(location);
+
+      const main = parseMainForecast(dataForecast);
+      setForecast((prevForecast) => ({ ...prevForecast, date, main }))
+
       handlerCurrentLocation(location)();
       handlerSearchPanelState('hidden')();
     } catch (error) {
