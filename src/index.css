@@ -1,0 +1,64 @@
+@import './styles/normalize.css';
+@import './styles/nullstyles.css';
+
+@import './styles/app.css';
+@import './styles/button-arrow.css';
+@import './styles/button-close.css';
+@import './styles/button.css';
+@import './styles/main.css';
+@import './styles/panels.css';
+@import './styles/progress-bar.css';
+@import './styles/side-bar.css';
+@import './styles/search-form.css';
+@import './styles/search-panel.css';
+@import './styles/tabpanel.css';
+@import './styles/tabs.css';
+@import './styles/swiper.css';
+@import './styles/theme-switcher.css';
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap');
+
+:root {
+  --text: #48484A;
+  --text-hint: #ACACAC;
+  --text-very-hint: #D3D3D3;
+  --panel: #FFF;
+  --border: #ACACAC;
+  --background-main: #F1F1F1;
+  --bg-item-history: #E6E6E6;
+  --switcher-theme-bg: #48484A;
+  --switcher-theme-moon: #E6E6E6;
+  --progess-bar: #EC6E4D;
+  --progess-bar-bg: #D3D3D3;
+}
+
+body {
+  background-color: var(--background-main);
+  font-size: 14px;
+  font-family: 'Rubik', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--text);
+  transition: none !important;
+}
+
+.dark-mode {
+  --text: #E6E6E6;
+  --text-hint: #6D6D6D;
+  --text-very-hint: #6D6D6D;
+  --panel: #212331;
+  --border: #ACACAC;
+  --background-main: #100E1C;
+  --bg-item-history: #100E1C;
+  --switcher-theme-bg: #EC6E4D;
+  --switcher-theme-moon: #212331;
+  --progess-bar: #EC6E4D;
+  --progess-bar-bg: #E6E6E6;
+}
+
+@media (max-width: 833px) {
+  html::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+}

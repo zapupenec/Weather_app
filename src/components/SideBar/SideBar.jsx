@@ -41,7 +41,7 @@ export function SideBar() {
           <div className="side-bar__bgWeather">
             <img
               className="side-bar__imageWeather"
-              src={icon ? `https://openweathermap.org/img/wn/${icon}@2x.png` : ''}
+              src={icon ? `https://openweathermap.org/img/wn/${icon}@4x.png` : ''}
               alt='иконка погоды'
             />
           </div>

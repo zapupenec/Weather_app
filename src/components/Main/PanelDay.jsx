@@ -18,7 +18,7 @@ export function PanelDay({ date, forecastDay }) {
           <time className="panel-day__date" dateTime={dataTime}>{dateDisplay}</time>
           <img
             className="panel-day__image"
-            src={`./image/panel/${forecastDay.description}.svg`}
+            src={forecastDay.icon ? `https://openweathermap.org/img/wn/${forecastDay.icon}@2x.png` : ''}
             alt={forecastDay.description}
           />
           <div className="panel-day__temperature">

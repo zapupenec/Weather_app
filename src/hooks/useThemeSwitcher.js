@@ -4,17 +4,17 @@ export function useThemeSwitcher() {
   const [darkModeState, setDarkModeState] = useState(false);
   const handlerDarkMode = (state) => () => setDarkModeState(state);
 
-  const app = document.querySelector('.app');
+  const html = document.querySelector('html');
 
   useEffect(() => {
-    if (app === null) return;
+    if (html === null) return;
 
     if (darkModeState) {
-      app.classList.add('dark-mode');
+      html.classList.add('dark-mode');
     } else {
-      app.classList.remove('dark-mode');
+      html.classList.remove('dark-mode');
     }
-  }, [darkModeState, app]);
+  }, [darkModeState, html]);
 
   return { darkModeState, handlerDarkMode };
 }

@@ -1,0 +1,139 @@
+.swiper {
+  max-width: 100%;
+  position: relative;
+}
+
+.swiper__button_left {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -28px;
+  margin-left: -38px;
+}
+
+.swiper__button_right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  right: -28px;
+  margin-right: -38px;
+}
+
+.swiper__items {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  overflow: hidden;
+}
+
+@media (max-width: 1440px) {
+  .swiper {
+    max-width: 596px;
+  }
+
+  .swiper__button_left {
+    left: calc(-13px + (-28 + 13) * ((100vw - 1276px) / (1440 - 1300)));
+  }
+
+  .swiper__button_right {
+    right: calc(-13px + (-28 + 13) * ((100vw - 1276px) / (1440 - 1300)));
+  }
+}
+
+@media (min-width: 1276px) {
+  .swiper {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 1276px) {
+  .swiper {
+    max-width: 596px;
+  }
+
+  .swiper__button_left {
+    left: -13px;
+  }
+
+  .swiper__button_right {
+    right: -13px;
+  }
+}
+
+@media (max-width: 1316px) {
+  .swiper {
+    max-width: 596px;
+  }
+
+}
+
+@media (max-width: 1192px) {
+  .swiper {
+    max-width: 472px;
+  }
+
+}
+
+@media (max-width: 1068px) {
+  .swiper {
+    max-width: 348px;
+  }
+}
+
+@media (max-width: 833px) {
+  .swiper {
+    max-width: 596px;
+  }
+}
+
+@media (max-width: 720px) {
+  .swiper {
+    max-width: 100%;
+  }
+
+  .swiper__items {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    gap: 30px;
+  }
+
+  .swiper__button_left,
+  .swiper__button_right {
+    display: none;
+  }
+}
+
+@media (max-width: 660px) {
+  .swiper__items {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 530px) {
+  .swiper__items {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 410px) {
+  .swiper__items {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 374px) {
+  .swiper__items {
+    column-gap: calc(0px + (30 - 0) * ((100vw - 280px) / (374 - 280)));
+    row-gap: calc(10px + (30 - 10) * ((100vw - 280px) / (374 - 280)));
+    justify-content: center;
+  }
+}
+
+@media (max-width: 280px) {
+  .swiper__items {
+    row-gap: 10px;
+    justify-content: center;
+  }
+}

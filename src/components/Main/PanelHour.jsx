@@ -13,7 +13,7 @@ export function PanelHour({ forecastHour }) {
           <time className="panel-hour__date" dateTime={`${hours}:00`}>{hours}:00</time>
           <img
             className="panel-hour__image"
-            src={`./image/panel/${forecastHour.description}.svg`}
+            src={forecastHour.icon ? `https://openweathermap.org/img/wn/${forecastHour.icon}@2x.png` : ''}
             alt={forecastHour.description}
           />
           <div className="panel-hour__temperature">{forecastHour.temperature}°C</div>

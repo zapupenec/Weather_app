@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { WeatherAppContext } from "../../contexts";
 import { Loader } from '..';
-import { ProgressBar } from "./ProgressBar";
+import { ProgressBar } from ".";
 
 const getBodyPanelExtra = (typePanelExtra, forecast) => {
   const {

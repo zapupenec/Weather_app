@@ -14,36 +14,43 @@ const forecast = {
   days: [
     {
       description: 'default',
+      icon: '50d',
       temperatureDay: 10,
       temperatureNight: 4,
     },
     {
       description: 'rain',
+      icon: '10d',
       temperatureDay: 10,
       temperatureNight: 4,
     },
     {
       description: 'rain',
+      icon: '10d',
       temperatureDay: 10,
       temperatureNight: 4,
     },
     {
       description: 'thunderstorm',
+      icon: '11d',
       temperatureDay: 10,
       temperatureNight: 4,
     },
     {
       description: 'thunderstorm',
+      icon: '11d',
       temperatureDay: 10,
       temperatureNight: 4,
     },
     {
       description: 'thunderstorm',
+      icon: '11d',
       temperatureDay: 10,
       temperatureNight: 4,
     },
     {
       description: 'thunderstorm',
+      icon: '11d',
       temperatureDay: 10,
       temperatureNight: 4,
     },
@@ -52,50 +59,62 @@ const forecast = {
   hours: [
     {
       description: 'default',
+      icon: '50d',
       temperature: 10,
     },
     {
       description: 'default',
+      icon: '50d',
       temperature: 10,
     },
     {
       description: 'default',
+      icon: '50d',
       temperature: 10,
     },
     {
       description: 'default',
+      icon: '50d',
       temperature: 10,
     },
     {
       description: 'thunderstorm',
+      icon: '11d',
       temperature: 10,
     },
     {
       description: 'thunderstorm',
+      icon: '11d',
       temperature: 10,
     },
     {
       description: 'default',
+      icon: '50d',
       temperature: 10,
     },
     {
       description: 'default',
+      icon: '50d',
       temperature: 10,
     },
     {
       description: 'default',
+      icon: '50d',
       temperature: 10,
     },
     {
       description: 'default',
+      icon: '50d',
       temperature: 10,
     },
     {
       description: 'thunderstorm',
+      icon: '11d',
       temperature: 10,
     },
     {
       description: 'thunderstorm',
+      icon: '11d',
       temperature: 10,
     },
   ],

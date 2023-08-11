@@ -1,5 +1,4 @@
 import React from "react";
-import './style.css';
 
 export function ProgressBar({ value }) {
   const className = [

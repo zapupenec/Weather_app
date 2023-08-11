@@ -8,25 +8,27 @@ export function Main() {
 
   return (
     <main className="main">
-      <Tabs tabNames={{ days: "на неделю", hours: "почасовой" }}>
-        <Swiper key="days">
-          {days.map((forecastDay, i) => <PanelDay key={i} date={date} forecastDay={forecastDay} />)}
-        </Swiper>
+      <div className="main__wrapper">
+        <Tabs tabNames={{ days: "на неделю", hours: "почасовой" }}>
+          <Swiper key="days">
+            {days.map((forecastDay, i) => <PanelDay key={i} date={date} forecastDay={forecastDay} />)}
+          </Swiper>
 
-        <Swiper key="hours">
-          {hours.map((forecastHour, i) => <PanelHour key={i} forecastHour={forecastHour} />)}
-        </Swiper>
-      </Tabs>
+          <Swiper key="hours">
+            {hours.map((forecastHour, i) => <PanelHour key={i} forecastHour={forecastHour} />)}
+          </Swiper>
+        </Tabs>
 
-      <div className="today-panels">
-        <h1 className="today-panels__title">Подробно на сегодня</h1>
-        <div className="today-panels__group">
-          <PanelExtra type="wind" />
-          <PanelExtra type="humidity" />
-        </div>
-        <div className="today-panels__group">
-          <PanelExtra type="visibility" size="small" />
-          <PanelExtra type="pressure" size="small" />
+        <div className="today-panels">
+          <h1 className="today-panels__title">Подробно на сегодня</h1>
+          <div className="today-panels__group">
+            <PanelExtra type="wind" />
+            <PanelExtra type="humidity" />
+          </div>
+          <div className="today-panels__group">
+            <PanelExtra type="visibility" size="small" />
+            <PanelExtra type="pressure" size="small" />
+          </div>
         </div>
       </div>
     </main>

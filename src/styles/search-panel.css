@@ -45,7 +45,7 @@
   top: 50%;
   transform: translateY(-50%);
   right: 30px;
-  background: no-repeat url('../../public/image/arrow-active-search-history.svg');
+  background: no-repeat url('../assets/arrow-active-search-history.svg');
   opacity: 0;
   transition: opacity 0.5s;
 }
@@ -63,4 +63,19 @@
 .search-history__item:hover::after,
 .search-history__item_active::after {
   opacity: 1;
+}
+
+@media (max-width: 1440px) {
+  .search-panel {
+    padding-right: calc(25px + (45 - 25) * ((100vw - 834px) / (1440 - 834)));
+    padding-left: calc(25px + (45 - 25) * ((100vw - 834px) / (1440 - 834)));
+  }
+}
+
+@media (max-width: 833px) {
+  .search-panel {
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
 }

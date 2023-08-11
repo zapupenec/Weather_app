@@ -1,0 +1,13 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 833px) {
+  .app {
+    height: auto;
+    flex-direction: column;
+  }
+}
