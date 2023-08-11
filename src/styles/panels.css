@@ -76,52 +76,84 @@
 .panel-extra__direction-wind {
   font-size: 18px;
   font-weight: 300;
-  margin-top: 3px;
 
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.panel-extra__direction-wind::before {
-  content: '';
-  display: block;
+.panel-extra__wind-indicator {
   width: 38px;
   height: 38px;
+  border-radius: 50%;
   background: no-repeat url('../assets/direction-wind.svg');
-  transition: 0.5s;
+  background-position: center;
+  background-color: var(--indicator-wind-bg);
 }
 
-.panel-extra__direction-wind_northwestern::before {
+.panel-extra__wind-indicator_id0
+.panel-extra__wind-indicator_id16 {
   transform: rotate(0deg);
 }
 
-.panel-extra__direction-wind_northern::before {
+.panel-extra__wind-indicator_id1 {
+  transform: rotate(22.5deg);
+}
+
+.panel-extra__wind-indicator_id2 {
   transform: rotate(45deg);
 }
 
-.panel-extra__direction-wind_northeastern::before {
+.panel-extra__wind-indicator_id3 {
+  transform: rotate(67.5deg);
+}
+
+.panel-extra__wind-indicator_id4 {
   transform: rotate(90deg);
 }
 
-.panel-extra__direction-wind_eastern::before {
+.panel-extra__wind-indicator_id5 {
+  transform: rotate(112.5deg);
+}
+
+.panel-extra__wind-indicator_id6 {
   transform: rotate(135deg);
 }
 
-.panel-extra__direction-wind_southeastern::before {
+.panel-extra__wind-indicator_id7 {
+  transform: rotate(157.5deg);
+}
+
+.panel-extra__wind-indicator_id8 {
   transform: rotate(180deg);
 }
 
-.panel-extra__direction-wind_southern::before {
+.panel-extra__wind-indicator_id9 {
+  transform: rotate(202.5deg);
+}
+
+.panel-extra__wind-indicator_id10 {
   transform: rotate(225deg);
 }
 
-.panel-extra__direction-wind_southwestern::before {
+.panel-extra__wind-indicator_id11 {
+  transform: rotate(247.5deg);
+}
+
+.panel-extra__wind-indicator_id12 {
   transform: rotate(270deg);
 }
 
-.panel-extra__direction-wind_western::before {
+.panel-extra__wind-indicator_id13 {
+  transform: rotate(292.5deg);
+}
+
+.panel-extra__wind-indicator_id14 {
   transform: rotate(315deg);
+}
+
+.panel-extra__wind-indicator_id15 {
+  transform: rotate(337.5deg);
 }
 
 @media (max-width: 374px) {

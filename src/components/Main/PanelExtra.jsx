@@ -6,19 +6,21 @@ import { ProgressBar } from ".";
 const getBodyPanelExtra = (typePanelExtra, forecast) => {
   const {
     wind,
-    directionWind,
     humidity,
     visibility,
     pressure,
   } = forecast.main;
-
+ 
   switch (typePanelExtra) {
     case "wind":
       return (
         <>
           <p className="panel-extra__title">Скорость ветра</p>
-          <p className="panel-extra__info">{wind} <span className="panel-extra__measure">м/с</span></p>
-          <div className="panel-extra__direction-wind panel-extra__direction-wind_northwestern">{directionWind}</div>
+          <p className="panel-extra__info">{wind.speed} <span className="panel-extra__measure">м/с</span></p>
+          <div className="panel-extra__direction-wind">
+            <div className={`panel-extra__wind-indicator panel-extra__wind-indicator_id${wind.id}`} />
+            <span>{wind.description}</span>
+          </div>
         </>
       );
     case "humidity":
@@ -26,7 +28,7 @@ const getBodyPanelExtra = (typePanelExtra, forecast) => {
         <>
           <p className="panel-extra__title">Влажность</p>
           <p className="panel-extra__info">{humidity} <span className="panel-extra__measure">%</span></p>
-          <ProgressBar value={humidity}/>
+          <ProgressBar value={humidity} />
         </>
       );
     case "visibility":

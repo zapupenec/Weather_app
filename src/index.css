@@ -29,6 +29,8 @@
   --switcher-theme-moon: #E6E6E6;
   --progess-bar: #EC6E4D;
   --progess-bar-bg: #D3D3D3;
+  --indicator-wind: #E6E6E6;
+  --indicator-wind-bg: #48484A;
 }
 
 body {

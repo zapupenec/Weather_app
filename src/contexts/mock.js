@@ -1,11 +1,16 @@
+// как его удалить теперь?)
+
 const forecast = {
   date: new Date(),
   main: {
     description: 'Снег',
     temperature: 1,
     feeling: -3,
-    wind: 7,
-    directionWind: 'СЗ',
+    wind: {
+      speed: 7,
+      description: 'C',
+      id: 0,
+    },
     humidity: 84,
     visibility: 6.2,
     pressure: 742,
