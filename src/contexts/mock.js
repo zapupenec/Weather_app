@@ -63,6 +63,7 @@ const forecast = {
 
   hours: [
     {
+      time: '15:00',
       description: 'default',
       icon: '50d',
       temperature: 10,

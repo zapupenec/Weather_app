@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Button, SearchPanel, ThemeSwitcher } from ".";
-import { WeatherAppContext } from "../../contexts";
-import { getDisplayForecastDay } from "../../support";
+import { SearchProvider, WeatherAppContext } from "../../contexts";
+import { getDisplayForecastDay } from "../../utils";
 import { Loader } from "..";
 
 export function SideBar() {
@@ -29,9 +29,11 @@ export function SideBar() {
 
   return (
     <section className="side-bar">
-      <SearchPanel
-        block="side-bar"
-      />
+      <SearchProvider>
+        <SearchPanel
+          block="side-bar"
+        />
+      </SearchProvider>
       <div className="side-bar__buttons-row">
         <Button type="button" onClick={handleSearchPanelState('shown')}>Поиск города</Button>
         <ThemeSwitcher />

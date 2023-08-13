@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { WeatherAppContext } from './WeatherAppContext';
-import { parseMainForecast, requestForecast, requestLocation } from '../support';
+import { parseWeather, requestWeather, requestForecast, requestLocation, parseForecast } from '../utils';
 import mockForecast from './mock'
 
 export const WeatherAppProvider = ({ children }) => {
@@ -29,12 +29,16 @@ export const WeatherAppProvider = ({ children }) => {
     async function fetchData() {
       const date = new Date();
       const location = await requestLocation('Москва');
-
       handleCurrentLocation(location)();
-      const dataForecast = await requestForecast(location);
 
-      const main = parseMainForecast(dataForecast);
-      setForecast((prevForecast) => ({ ...prevForecast, date, main }))
+      const dataWeather = await requestWeather(location);
+      const main = parseWeather(dataWeather);
+
+      const dataForecast = await requestForecast(location);
+      const hours = parseForecast(dataForecast, 'hours');
+      const days = parseForecast(dataForecast, 'days');
+
+      setForecast((prevForecast) => ({ ...prevForecast, date, main, hours, days }))
 
       setFormState('filling');
     }

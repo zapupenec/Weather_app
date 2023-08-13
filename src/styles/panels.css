@@ -169,3 +169,14 @@
     font-size: calc(12px + (18 - 12) * ((100vw - 280px) / (374 - 280)));
   }
 }
+
+@media (max-width: 280px) {
+  .panel-extra {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .panel-extra__measure_size_small {
+    font-size: 12px;
+  }
+}

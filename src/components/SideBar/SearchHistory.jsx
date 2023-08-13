@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { ErrorContext, WeatherAppContext } from "../../contexts";
-import { parseMainForecast, requestForecast } from "../../support";
+import { SearchContext, WeatherAppContext } from "../../contexts";
+import { parseForecast, parseWeather, requestForecast, requestWeather } from "../../utils";
 
-export function SearchHistory({ history }) {
+export function SearchHistory() {
   const {
     setForecast,
     currentLocation,
@@ -11,18 +11,30 @@ export function SearchHistory({ history }) {
     setFormState,
   } = useContext(WeatherAppContext);
 
-  const { setError } = useContext(ErrorContext);
+  const {
+    setError,
+    setSearchValue,
+    searchHistory,
+  } = useContext(SearchContext);
 
   const handleClick = (location) => async () => {
+    setError('');
     setFormState('waiting');
+
     try {
       const date = new Date();
-      const dataForecast = await requestForecast(location);
 
-      const main = parseMainForecast(dataForecast);
-      setForecast((prevForecast) => ({ ...prevForecast, date, main }))
+      const dataWeather = await requestWeather(location);
+      const main = parseWeather(dataWeather);
+
+      const dataForecast = await requestForecast(location);
+      const hours = parseForecast(dataForecast, 'hours');
+      const days = parseForecast(dataForecast, 'days');
+
+      setForecast((prevForecast) => ({ ...prevForecast, date, main, hours, days }))
 
       handleCurrentLocation(location)();
+      setSearchValue('');
       handleSearchPanelState('hidden')();
     } catch (error) {
       if (error.message === 'Failed to fetch') {
@@ -39,9 +51,9 @@ export function SearchHistory({ history }) {
 
   return (
     <div className={searchHistoryClassName}>
-      {history.map((location, i) => (
+      {searchHistory.map((location, i) => (
         <p
-          key={`location_${history.length + i + 1}`}
+          key={`location_${searchHistory.length + i + 1}`}
           className={`search-history__item${location.cityName === currentLocation.cityName ? " search-history__item_active" : ""}`}
           onClick={handleClick(location)}
         >{location.cityName}</p>

@@ -65,10 +65,10 @@
   opacity: 1;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1439px) {
   .search-panel {
-    padding-right: calc(25px + (45 - 25) * ((100vw - 834px) / (1440 - 834)));
-    padding-left: calc(25px + (45 - 25) * ((100vw - 834px) / (1440 - 834)));
+    padding-right: calc(25px + (45 - 25) * ((100vw - 834px) / (1439 - 834)));
+    padding-left: calc(25px + (45 - 25) * ((100vw - 834px) / (1439 - 834)));
   }
 }
 

@@ -1,11 +1,11 @@
-import { useRef, useState, useContext } from "react";
+import { useRef, useContext } from "react";
 import { Button } from ".";
-import { ErrorContext, WeatherAppContext } from "../../contexts";
-import { parseMainForecast, requestForecast, requestLocation } from "../../support";
+import { SearchContext, WeatherAppContext } from "../../contexts";
+import { parseWeather, requestWeather, requestLocation, requestForecast, parseForecast } from "../../utils";
 
 const hasLocation = (searchHistory, location) => !!searchHistory.find((log) => log.cityName === location.cityName);
 
-export function SearchForm({ searchHistory, addSeachHistory }) {
+export function SearchForm() {
   const {
     setForecast,
     handleSearchPanelState,
@@ -14,11 +14,16 @@ export function SearchForm({ searchHistory, addSeachHistory }) {
     setFormState,
   } = useContext(WeatherAppContext);
 
-  const { error, setError } = useContext(ErrorContext);
+  const {
+    error,
+    setError,
+    searchValue,
+    setSearchValue,
+    searchHistory,
+    addSeachHistory,
+  } = useContext(SearchContext);
 
-  const [searchValue, setSearchValue] = useState('');
   const btnSubmitRef = useRef();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,11 +35,16 @@ export function SearchForm({ searchHistory, addSeachHistory }) {
 
     try {
       const date = new Date();
-      const location = await requestLocation(searchValue)
-      const dataForecast = await requestForecast(location);
+        const location = await requestLocation(searchValue)
 
-      const main = parseMainForecast(dataForecast);
-      setForecast((prevForecast) => ({ ...prevForecast, date, main }))
+      const dataWeather = await requestWeather(location);
+      const main = parseWeather(dataWeather);
+
+      const dataForecast = await requestForecast(location);
+      const hours = parseForecast(dataForecast, 'hours');
+      const days = parseForecast(dataForecast, 'days');
+
+      setForecast((prevForecast) => ({ ...prevForecast, date, main, hours, days }))
 
       handleCurrentLocation(location)();
       setSearchValue('');
@@ -50,6 +60,7 @@ export function SearchForm({ searchHistory, addSeachHistory }) {
       } else {
         setError('Упс! Город не найден, попробуйте другой');
       }
+      searchInputRef.current.disabled = false;
       searchInputRef.current.focus();
       console.error(error);
     }

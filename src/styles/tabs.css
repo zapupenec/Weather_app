@@ -68,7 +68,7 @@
 
 @media (max-width: 720px) {
   .tabs {
-    align-items: stretch;
+    /* align-items: stretch; */
   }
 
   .tabs__header {

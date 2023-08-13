@@ -3,6 +3,7 @@ const toUpperCaseFirstlLetter = (str) => `${str.slice(0, 1).toUpperCase()}${str.
 const windMap = {
   0: 'С',
   1: 'ССВ',
+  2: 'СВ',
   3: 'ВСВ',
   4: 'В',
   5: 'ВЮВ',
@@ -32,13 +33,13 @@ const getWindData = (speed, deg) => {
   };
 };
 
-export const parseMainForecast = (data) => ({
+export const parseWeather = (data) => ({
   description: toUpperCaseFirstlLetter(data.weather[0].description),
   icon: data.weather[0].icon,
   temperature: Math.round(data.main.temp),
   feeling: Math.round(data.main.feels_like),
   wind: getWindData(data.wind.speed, data.wind.deg),
-  humidity: (data.main.humidity * 0,75),
-  pressure: data.main.pressure,
+  humidity: data.main.humidity,
+  pressure: Math.round(data.main.pressure * 0.75),
   visibility: Math.round(data.visibility / 1000 * 10) / 10,
 });

@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 460px;
+  width: 460px;
+  max-width: 460px;
   padding: 45px;
   height: 720px;
-  max-height: 1194px;
+  min-height: 667px;
 
   background: no-repeat url('../assets/cloudsBack.svg'), var(--panel);
   background-blend-mode: difference;
@@ -43,6 +44,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  z-index: 1;
 }
 
 .side-bar__bgWeather {
@@ -97,7 +99,7 @@
 }
 
 .side-bar__location {
-  margin-left: 12px;
+  /* margin-left: 12px; */
   font-size: 18px;
   color: var(--text-hint);
   word-break: break-all;
@@ -115,24 +117,34 @@
 
   position: absolute;
   top: -10px;
-  left: -52px;
+  left: -40px;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1439px) and (max-height: 1194px) {
   .side-bar {
+    align-self: normal;
+  }
+}
+
+@media (max-width: 1439px) {
+  .side-bar {
+    align-self: flex-start;
     height: 100vh;
-    min-width: calc(329px + (460 - 329) * ((100vw - 834px) / (1440 - 834)));
-    padding-right: calc(25px + (45 - 25) * ((100vw - 834px) / (1440 - 834)));
-    padding-left: calc(25px + (45 - 25) * ((100vw - 834px) / (1440 - 834)));
+    max-width: calc(329px + (460 - 329) * ((100vw - 834px) / (1439 - 834)));
+    padding-right: calc(25px + (45 - 25) * ((100vw - 834px) / (1439 - 834)));
+    padding-left: calc(25px + (45 - 25) * ((100vw - 834px) / (1439 - 834)));
   }
 }
 
 @media (max-width: 833px) {
   .side-bar {
+    align-self: normal;
     padding-top: 30px;
     padding-right: 30px;
     padding-left: 30px;
+    padding-bottom: calc(40px + (45 - 40) * ((100vw - 375px) / (834 - 375)));
     width: 100%;
+    max-width: 100%;
     justify-content: end;
     background-position: center 20%;
   }
@@ -140,16 +152,22 @@
   .side-bar::before {
     display: none;
   }
-}
 
-@media (max-width: 374px) {
-  .side-bar__location::after {
-    left: calc(-40px + (-52 + 40) * ((100vw - 320px) / (374 - 320)));
+  .side-bar__feeling {
+    margin-bottom: calc(65px + (80 - 65) * ((100vw - 375px) / (834 - 375)));
   }
 }
 
-@media (max-width: 320px) {
-  .side-bar__location::after {
-    left: -40px;
+@media (max-width: 374px) {
+  .side-bar {
+    padding-right: calc(15px + (30 - 15) * ((100vw - 280px) / (374 - 280)));
+    padding-left: calc(15px + (30 - 15) * ((100vw - 280px) / (374 - 280)));
+  }
+}
+
+@media (max-width: 280px) {
+  .side-bar {
+    padding-right: 15px;
+    padding-left: 15px;
   }
 }

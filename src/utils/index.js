@@ -1,11 +1,15 @@
 import { getDisplayForecastDay } from './getDisplayForecastDay';
-import { parseMainForecast } from './parseMainForecast';
+import { parseForecast } from './parseForecast';
+import { parseWeather } from './parseWeather';
+import { requestWeather } from './requestWeather';
 import { requestForecast } from './requestForecast';
 import { requestLocation } from './requestLocation';
 
 export {
   getDisplayForecastDay,
-  parseMainForecast,
+  parseForecast,
+  parseWeather,
+  requestWeather,
   requestForecast,
   requestLocation,
 };

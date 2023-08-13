@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { getDisplayForecastDay } from '../../support';
+import { getDisplayForecastDay } from '../../utils';
 import { WeatherAppContext } from '../../contexts';
 import { Loader } from '..';
 

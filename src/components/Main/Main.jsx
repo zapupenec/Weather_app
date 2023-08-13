@@ -20,7 +20,7 @@ export function Main() {
         </Tabs>
 
         <div className="today-panels">
-          <h1 className="today-panels__title">Подробно на сегодня</h1>
+          <h2 className="today-panels__title">Подробно на сегодня</h2>
           <div className="today-panels__group">
             <PanelExtra type="wind" />
             <PanelExtra type="humidity" />
