@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Tabs, Swiper, PanelDay, PanelExtra, PanelHour } from ".";
+import { Tabs, Swiper, PanelExtra, PanelDay, PanelHour } from ".";
 import { WeatherAppContext } from "../../contexts";
 
 export function Main() {
@@ -13,7 +13,6 @@ export function Main() {
           <Swiper key="days">
             {days.map((forecastDay, i) => <PanelDay key={i} date={date} forecastDay={forecastDay} />)}
           </Swiper>
-
           <Swiper key="hours">
             {hours.map((forecastHour, i) => <PanelHour key={i} forecastHour={forecastHour} />)}
           </Swiper>
@@ -30,7 +29,7 @@ export function Main() {
             <PanelExtra type="pressure" size="small" />
           </div>
         </div>
-      </div>
-    </main>
+      </div >
+    </main >
   );
 }

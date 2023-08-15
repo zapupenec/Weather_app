@@ -18,6 +18,7 @@ export function Tabs({ tabNames, children }) {
       </div>
 
       {React.Children.map(children, (child) => {
+        if (child.key !== activeTabId) return null;
         return <TabPanel activeTabId={activeTabId} id={child.key}>{child}</TabPanel>
       })}
     </div>

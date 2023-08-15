@@ -62,13 +62,7 @@
 @media (max-width: 833px) {
   .tabs {
     gap: 40px;
-    align-items: center;
-  }
-}
-
-@media (max-width: 720px) {
-  .tabs {
-    /* align-items: stretch; */
+    align-items: stretch;
   }
 
   .tabs__header {

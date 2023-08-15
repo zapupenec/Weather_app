@@ -10,7 +10,7 @@ const getBodyPanelExtra = (typePanelExtra, forecast) => {
     visibility,
     pressure,
   } = forecast.main;
- 
+
   switch (typePanelExtra) {
     case "wind":
       return (
@@ -18,7 +18,12 @@ const getBodyPanelExtra = (typePanelExtra, forecast) => {
           <p className="panel-extra__title">Скорость ветра</p>
           <p className="panel-extra__info">{wind.speed} <span className="panel-extra__measure">м/с</span></p>
           <div className="panel-extra__direction-wind">
-            <div className={`panel-extra__wind-indicator panel-extra__wind-indicator_id${wind.id}`} />
+            <div
+              className={`panel-extra__wind-indicator`}
+              style={{
+                transform: `rotate(${wind.deg}deg)`,
+              }}
+            />
             <span>{wind.description}</span>
           </div>
         </>

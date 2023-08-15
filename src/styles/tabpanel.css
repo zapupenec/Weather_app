@@ -1,5 +1,5 @@
 .tabpanel {
-  display: none;
+  display: block;
 }
 
 .tabpanel_shown {

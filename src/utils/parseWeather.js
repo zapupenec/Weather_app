@@ -28,7 +28,6 @@ const getWindData = (speed, deg) => {
   return {
     speed: Math.round(speed * 10) / 10,
     description: windMap[id],
-    id,
     deg,
   };
 };

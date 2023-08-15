@@ -3,7 +3,7 @@
   position: relative;
 }
 
-.swiper__button_left {
+.swiper__button_prev {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -11,7 +11,7 @@
   margin-left: -38px;
 }
 
-.swiper__button_right {
+.swiper__button_next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%) rotate(180deg);
@@ -32,11 +32,11 @@
     max-width: 596px;
   }
 
-  .swiper__button_left {
+  .swiper__button_prev {
     left: calc(-13px + (-28 + 13) * ((100vw - 1276px) / (1440 - 1300)));
   }
 
-  .swiper__button_right {
+  .swiper__button_next {
     right: calc(-13px + (-28 + 13) * ((100vw - 1276px) / (1440 - 1300)));
   }
 }
@@ -52,11 +52,11 @@
     max-width: 596px;
   }
 
-  .swiper__button_left {
+  .swiper__button_prev {
     left: -13px;
   }
 
-  .swiper__button_right {
+  .swiper__button_next {
     right: -13px;
   }
 }
@@ -83,12 +83,7 @@
 
 @media (max-width: 833px) {
   .swiper {
-    max-width: 596px;
-  }
-}
-
-@media (max-width: 720px) {
-  .swiper {
+    width: 100%;
     max-width: 100%;
   }
 
@@ -100,8 +95,8 @@
     gap: 30px;
   }
 
-  .swiper__button_left,
-  .swiper__button_right {
+  .swiper__button_prev,
+  .swiper__button_next {
     display: none;
   }
 }

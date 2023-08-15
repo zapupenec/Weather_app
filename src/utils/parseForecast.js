@@ -38,17 +38,13 @@ export const parseForecast = (data, type) => {
     const nightFourcasts = filteredList.filter((item) => new Date(item.dt_txt).getHours() === nightHours);
     const dayFourcasts = filteredList.filter((item) => new Date(item.dt_txt).getHours() === dayHours);
 
-    const weekForecast = [];
-    for (let i = 0; i < dayFourcasts.length; i += 1) {
-      const forecast = {
-        date: new Date(dayFourcasts[i].dt_txt),
-        description: dayFourcasts[i].weather[0].description,
-        icon: dayFourcasts[i].weather[0].icon,
-        temperatureDay: Math.round(dayFourcasts[i].main.temp),
-        temperatureNight: Math.round(nightFourcasts[i].main.temp),
-      }
-      weekForecast.push(forecast);
-    }
+    const weekForecast = dayFourcasts.map((item, i) => ({
+      date: new Date(item.dt_txt),
+      description: item.weather[0].description,
+      icon: item.weather[0].icon,
+      temperatureDay: Math.round(item.main.temp),
+      temperatureNight: Math.round(nightFourcasts[i].main.temp),
+    }));
 
     return weekForecast;
   }
