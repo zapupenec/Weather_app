@@ -1,14 +1,92 @@
 import { useState, useRef, useEffect } from 'react';
 import { WeatherAppContext } from './WeatherAppContext';
-import { parseWeather, requestWeather, requestForecast, requestLocation, parseForecast } from '../utils';
-import mockForecast from './mock'
+import { requestDataFrom, parseData } from '../utils';
+
+const initialForecastObj = {
+  main: {
+    description: '',
+    temperature: 0,
+    feeling: 0,
+    wind: {
+      speed: 0,
+      description: '',
+      id: 0,
+    },
+    humidity: 0,
+    visibility: 0,
+    pressure: 0,
+  },
+
+  days: new Array(6).fill({
+    date: new Date(),
+    description: '',
+    icon: '',
+    temperatureDay: 0,
+    temperatureNight: 0,
+  }),
+
+  hours: new Array(6).fill({
+    time: '',
+    description: '',
+    icon: '',
+    temperature: 0,
+  }),
+};
 
 export const WeatherAppProvider = ({ children }) => {
-  const [formState, setFormState] = useState('filling'); // filling, waiting
+  const [date, setDate] = useState(new Date());
+  const [forecast, setForecast] = useState(initialForecastObj);
+  const [currentLocation, setCurrentLocation] = useState({});
+  const handleCurrentLocation = (city) => () => {
+    setCurrentLocation(city);
+  }
+
+  const [processError, setProcessError] = useState([]);
+  const [processState, setProcessState] = useState('filling');
+  // filling, waiting, error, networkError 
+  // попробовать реализовать состояние initial
+
+  const searchInputRef = useRef(null);
+  const btnSubmitRef = useRef(null);
+  const searchHistoryRef = useRef(null);
+
+  const handleProcessState = (state) => {
+    setProcessState(state);
+
+    searchInputRef.current.disabled = false;
+    btnSubmitRef.current.disabled = false;
+
+    if (searchHistoryRef.current) {
+      searchHistoryRef.current.childNodes.forEach((child) => {
+        child.disabled = false;
+      });
+    }
+
+    switch (state) {
+      case 'filling':
+        break;
+      case 'waiting':
+        setProcessError('');
+        searchInputRef.current.disabled = true;
+        btnSubmitRef.current.disabled = true;
+        if (searchHistoryRef.current) {
+          searchHistoryRef.current.childNodes.forEach((child) => {
+            child.disabled = true;
+          });
+        }
+        break;
+      case 'error':
+        setProcessError('Упс! Город не найден, попробуйте другой');
+        break;
+      case 'networkError':
+        setProcessError('Ошибка сети!');
+        break;
+      default:
+        throw new Error(`Unknown form state: ${state}`);
+    }
+  };
 
   const [searchPanelState, setSearchPanelState] = useState('hidden');
-  const searchInputRef = useRef();
-
   const handleSearchPanelState = (state) => () => {
     setSearchPanelState(state);
     if (state === 'shown') {
@@ -16,45 +94,46 @@ export const WeatherAppProvider = ({ children }) => {
     }
   };
 
-  const [currentLocation, setCurrentLocation] = useState({});
-  const handleCurrentLocation = (city) => () => {
-    setCurrentLocation(city);
-  }
-
-  const [forecast, setForecast] = useState(mockForecast);
-
   useEffect(() => {
-    setFormState('waiting');
+    const wrapFunction = async () => {
+      handleProcessState('waiting');
+      try {
+        const { location, data } = await requestDataFrom('search', 'Москва');
 
-    async function fetchData() {
-      const date = new Date();
-      const location = await requestLocation('Москва');
-      handleCurrentLocation(location)();
+        handleCurrentLocation(location)();
+        setForecast((prevForecast) => ({ ...prevForecast, ...parseData(data) }))
 
-      const dataWeather = await requestWeather(location);
-      const main = parseWeather(dataWeather);
+        handleProcessState('filling');
+      } catch (error) {
+        if (error.isNetwork) {
+          handleProcessState('networkError');
+        } else {
+          handleProcessState('error');
+        }
 
-      const dataForecast = await requestForecast(location);
-      const hours = parseForecast(dataForecast, 'hours');
-      const days = parseForecast(dataForecast, 'days');
-
-      setForecast((prevForecast) => ({ ...prevForecast, date, main, hours, days }))
-
-      setFormState('filling');
+        console.error(error);
+      }
     }
-    fetchData();
+
+    wrapFunction();
   }, []);
 
   const providedData = {
+    date,
+    setDate,
     forecast,
     setForecast,
-    formState,
-    setFormState,
-    searchPanelState,
-    handleSearchPanelState,
     currentLocation,
     handleCurrentLocation,
+    processError,
+    setProcessError,
+    processState,
+    handleProcessState,
+    searchPanelState,
+    handleSearchPanelState,
     searchInputRef,
+    btnSubmitRef,
+    searchHistoryRef,
   };
 
   return (

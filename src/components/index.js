@@ -1,6 +1,6 @@
-import { Loader } from "./Loader";
-import { Main } from "./Main";
-import { SideBar } from "./SideBar";
+import { Loader } from './Loader';
+import { Main } from './Main';
+import { SideBar } from './SideBar';
 
 export {
   Loader,

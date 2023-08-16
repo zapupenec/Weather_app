@@ -3,8 +3,12 @@ import { Tabs, Swiper, PanelExtra, PanelDay, PanelHour } from ".";
 import { WeatherAppContext } from "../../contexts";
 
 export function Main() {
-  const { forecast } = useContext(WeatherAppContext);
-  const { date, days, hours } = forecast;
+  const {
+    date,
+    forecast,
+  } = useContext(WeatherAppContext);
+
+  const { days, hours } = forecast;
 
   return (
     <main className="main">

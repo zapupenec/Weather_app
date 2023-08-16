@@ -9,11 +9,11 @@ export function PanelDay({ date, forecastDay }) {
     dateDisplay,
   } = getDisplayForecastDay(forecastDay.date, date);
 
-  const { formState } = useContext(WeatherAppContext);
+  const { processState } = useContext(WeatherAppContext);
 
   return (
     <article className="panel-day">
-      {formState === 'waiting' ? <Loader /> : (
+      {processState !== 'filling' ? <Loader /> : (
         <>
           <time className="panel-day__date" dateTime={dataTime}>{dateDisplay}</time>
           <img

@@ -2,8 +2,8 @@ import { useState, } from 'react'
 import { SearchContext } from './SearchContext';
 
 export const SearchProvider = ({ children }) => {
-  const [error, setError] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+
   const [searchHistory, setSearcHistory] = useState([]);
   const addSeachHistory = (cityName) => {
     const maxLength = 5;
@@ -15,13 +15,11 @@ export const SearchProvider = ({ children }) => {
   };
 
   const providedData = {
-    error,
-    setError,
     searchValue,
     setSearchValue,
     searchHistory,
     addSeachHistory,
-  }
+  };
 
   return (
     <SearchContext.Provider value={providedData}>

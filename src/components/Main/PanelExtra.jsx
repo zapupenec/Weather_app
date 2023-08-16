@@ -56,7 +56,7 @@ const getBodyPanelExtra = (typePanelExtra, forecast) => {
 };
 
 export function PanelExtra({ type, size }) {
-  const { forecast, formState } = useContext(WeatherAppContext);
+  const { forecast, processState } = useContext(WeatherAppContext);
 
   const panelExtraClassName = [
     "panel-extra",
@@ -65,7 +65,7 @@ export function PanelExtra({ type, size }) {
 
   return (
     <article className={panelExtraClassName}>
-      {formState === 'waiting' ? <Loader /> : getBodyPanelExtra(type, forecast)}
+      {processState !== 'filling' ? <Loader /> : getBodyPanelExtra(type, forecast)}
     </article>
   );
 }

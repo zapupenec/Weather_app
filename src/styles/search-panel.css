@@ -27,6 +27,7 @@
 }
 
 .search-history__item {
+  text-align: start;
   color: var(--text);
   padding: 25px 60px 25px 25px;
   border-radius: 10px;

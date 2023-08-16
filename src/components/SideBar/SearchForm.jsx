@@ -1,73 +1,58 @@
-import { useRef, useContext } from "react";
+import { useContext } from "react";
 import { Button } from ".";
 import { SearchContext, WeatherAppContext } from "../../contexts";
-import { parseWeather, requestWeather, requestLocation, requestForecast, parseForecast } from "../../utils";
+import { parseData, requestDataFrom } from "../../utils";
 
 const hasLocation = (searchHistory, location) => !!searchHistory.find((log) => log.cityName === location.cityName);
 
 export function SearchForm() {
   const {
+    setDate,
     setForecast,
-    handleSearchPanelState,
     handleCurrentLocation,
+    processError,
+    handleProcessState,
+    handleSearchPanelState,
     searchInputRef,
-    setFormState,
+    btnSubmitRef,
   } = useContext(WeatherAppContext);
 
   const {
-    error,
-    setError,
     searchValue,
     setSearchValue,
     searchHistory,
     addSeachHistory,
   } = useContext(SearchContext);
 
-  const btnSubmitRef = useRef();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setDate(new Date());
 
-    setFormState('waiting');
-    setError('');
-
-    searchInputRef.current.disabled = true;
-    btnSubmitRef.current.disabled = true;
-
+    handleProcessState('waiting');
     try {
-      const date = new Date();
-        const location = await requestLocation(searchValue)
-
-      const dataWeather = await requestWeather(location);
-      const main = parseWeather(dataWeather);
-
-      const dataForecast = await requestForecast(location);
-      const hours = parseForecast(dataForecast, 'hours');
-      const days = parseForecast(dataForecast, 'days');
-
-      setForecast((prevForecast) => ({ ...prevForecast, date, main, hours, days }))
-
-      handleCurrentLocation(location)();
-      setSearchValue('');
+      const { location, data } = await requestDataFrom('search', searchValue);
 
       if (!hasLocation(searchHistory, location)) {
         addSeachHistory(location);
       }
 
+      handleCurrentLocation(location)();
+      setForecast((prevForecast) => ({ ...prevForecast, ...parseData(data) }))
+
       handleSearchPanelState('hidden')();
+      setSearchValue('');
+
+      handleProcessState('filling');
     } catch (error) {
-      if (error.message === 'Failed to fetch') {
-        setError('Ошибка сети!');
+      if (error.isNetwork) {
+        handleProcessState('networkError');
       } else {
-        setError('Упс! Город не найден, попробуйте другой');
+        handleProcessState('error');
       }
-      searchInputRef.current.disabled = false;
+
       searchInputRef.current.focus();
       console.error(error);
     }
-
-    setFormState('filling');
-    searchInputRef.current.disabled = false;
-    btnSubmitRef.current.disabled = false;
   };
 
   const handleChange = async ({ target }) => {
@@ -89,7 +74,7 @@ export function SearchForm() {
         <span className="search-form__search-border"></span>
       </div>
       <Button block="search-form" size="small" type="submit" btnSubmitRef={btnSubmitRef}>Найти</Button>
-      {(error !== '') && <div className="search-form__feedback">{error}</div>}
+      {(processError !== '') && <div className="search-form__feedback">{processError}</div>}
     </form>
   );
 }

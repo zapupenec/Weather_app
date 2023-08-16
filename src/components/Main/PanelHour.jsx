@@ -3,7 +3,7 @@ import { WeatherAppContext } from "../../contexts";
 import { Loader } from '..';
 
 export function PanelHour({ forecastHour }) {
-  const { formState } = useContext(WeatherAppContext);
+  const { processState } = useContext(WeatherAppContext);
   const {
     time,
     temperature,
@@ -13,7 +13,7 @@ export function PanelHour({ forecastHour }) {
 
   return (
     <article className="panel-hour">
-      {formState === 'waiting' ? <Loader /> : (
+      {processState !== 'filling' ? <Loader /> : (
         <>
           <time className="panel-hour__date" dateTime={time}>{time}</time>
           <img

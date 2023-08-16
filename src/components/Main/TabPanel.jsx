@@ -1,6 +1,6 @@
 import React from "react";
 
-export function TabPanel({ activeTabId, id, children }) {
+export function TabPanel({ id, children }) {
   return (
     <div
       className="tabpanel_shown"

@@ -1,62 +1,61 @@
-import { useContext } from "react";
-import { SearchContext, WeatherAppContext } from "../../contexts";
-import { parseForecast, parseWeather, requestForecast, requestWeather } from "../../utils";
+import { useContext } from 'react';
+import { SearchContext, WeatherAppContext } from '../../contexts';
+import { parseData, requestDataFrom } from '../../utils';
 
 export function SearchHistory() {
   const {
+    setDate,
     setForecast,
     currentLocation,
     handleCurrentLocation,
+    handleProcessState,
     handleSearchPanelState,
-    setFormState,
+    searchHistoryRef,
   } = useContext(WeatherAppContext);
 
   const {
-    setError,
     setSearchValue,
     searchHistory,
   } = useContext(SearchContext);
 
-  const handleClick = (location) => async () => {
-    setError('');
-    setFormState('waiting');
+  const handleClick = (locationFromHistory) => async (e) => {
+    e.preventDefault();
+    setDate(new Date());
 
+    handleProcessState('waiting');
     try {
-      const date = new Date();
-
-      const dataWeather = await requestWeather(location);
-      const main = parseWeather(dataWeather);
-
-      const dataForecast = await requestForecast(location);
-      const hours = parseForecast(dataForecast, 'hours');
-      const days = parseForecast(dataForecast, 'days');
-
-      setForecast((prevForecast) => ({ ...prevForecast, date, main, hours, days }))
+      const { location, data } = await requestDataFrom('history', locationFromHistory);
 
       handleCurrentLocation(location)();
-      setSearchValue('');
+      setForecast((prevForecast) => ({ ...prevForecast, ...parseData(data) }))
+
       handleSearchPanelState('hidden')();
+      setSearchValue('');
+
+      handleProcessState('filling');
     } catch (error) {
-      if (error.message === 'Failed to fetch') {
-        setError('Ошибка сети!');
+      if (error.isNetwork) {
+        handleProcessState('networkError');
+      } else {
+        handleProcessState('error');
       }
+
       console.error(error);
     }
-    setFormState('filling');
-  }
+  };
 
   const searchHistoryClassName = [
-    "search-history",
-  ].join(" ").trim();
+    'search-history',
+  ].join(' ').trim();
 
   return (
-    <div className={searchHistoryClassName}>
+    <div className={searchHistoryClassName} ref={searchHistoryRef}>
       {searchHistory.map((location, i) => (
-        <p
+        <button
           key={`location_${searchHistory.length + i + 1}`}
-          className={`search-history__item${location.cityName === currentLocation.cityName ? " search-history__item_active" : ""}`}
+          className={`search-history__item${location.cityName === currentLocation.cityName ? ' search-history__item_active' : ''}`}
           onClick={handleClick(location)}
-        >{location.cityName}</p>
+        >{location.cityName}</button>
       ))}
     </div>
   );
