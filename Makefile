@@ -1,3 +1,6 @@
+make install:
+	npm ci
+
 make start:
 	npm start --profile
 
