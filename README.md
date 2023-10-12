@@ -2,7 +2,7 @@
 
 EN | [RU](https://github.com/zapupenec/Weather_app/blob/master/README-ru.md)
 
-# [Weather app](https://weather_app-zapupenec.vercel.app)
+# [Weather app](https://weather-app-zapupenec.vercel.app)
 An application to search for weather by city name. Possibility of weather for 4-5 days or for 33 hours with an interval of 3 hours. The limitation is related to the selected free API.
 ![screenshot-ru](/image/weather_app-ru.png)
 

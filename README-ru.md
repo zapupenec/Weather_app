@@ -2,7 +2,7 @@
 
 [EN](https://github.com/zapupenec/Weather_app) | RU
 
-# [Приложение погоды](https://weather_app-zapupenec.vercel.app)
+# [Приложение погоды](https://weather-app-zapupenec.vercel.app)
 Приложение поиска погоды по названию города. Возможность просматривать погоду на 4-5 дней или на 33 часа с промежутком в 3 часа. Ограничение связано с выбранным бесплатным API.
 ![screenshot-ru](/image/weather_app-ru.png)
 
